@@ -13,12 +13,14 @@ SOURCES += \
     Tank.cpp \
     bullet.cpp \
     main.cpp \
+    score.cpp \
     widget.cpp
 
 HEADERS += \
     Scene.h \
     Tank.h \
     bullet.h \
+    score.h \
     widget.h
 
 FORMS += \
