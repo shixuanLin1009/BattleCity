@@ -14,6 +14,7 @@ SOURCES += \
     bullet.cpp \
     enemy.cpp \
     main.cpp \
+    obstacles.cpp \
     score.cpp \
     widget.cpp
 
@@ -22,6 +23,7 @@ HEADERS += \
     Tank.h \
     bullet.h \
     enemy.h \
+    obstacles.h \
     score.h \
     widget.h
 
