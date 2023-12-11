@@ -11,20 +11,12 @@ CONFIG += c++17
 SOURCES += \
     Scene.cpp \
     Tank.cpp \
-    bullet.cpp \
-    enemy.cpp \
     main.cpp \
-    obstacles.cpp \
-    score.cpp \
     widget.cpp
 
 HEADERS += \
     Scene.h \
     Tank.h \
-    bullet.h \
-    enemy.h \
-    obstacles.h \
-    score.h \
     widget.h
 
 FORMS += \
