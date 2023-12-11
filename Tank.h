@@ -3,11 +3,12 @@
 
 #include <QObject>
 #include <QWidget>
+#include<QGraphicsRectItem>
 
-class Tank
+class Tank:public QGraphicsRectItem
 {
 public:
-    Tank();
+    Tank(QGraphicsRectItem *parent=nullptr);
 };
 
 #endif // TANK_H

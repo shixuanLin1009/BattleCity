@@ -3,8 +3,6 @@
 
 #include <QWidget>
 #include<Scene.h>
-#include <QGraphicsScene>
-#include <QGraphicsView>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
