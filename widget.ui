@@ -13,14 +13,56 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QGraphicsView" name="graphicsView">
+  <widget class="QPushButton" name="startGameButton">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>541</width>
-     <height>501</height>
+     <x>290</x>
+     <y>180</y>
+     <width>191</width>
+     <height>101</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>1 PLAYER</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startGameButton_2">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>310</y>
+     <width>191</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2 PLAYERS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startGameButton_3">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>440</y>
+     <width>191</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>QUIT GAME</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startGameButton_4">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>50</y>
+     <width>191</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CONTINUE</string>
    </property>
   </widget>
  </widget>

@@ -3,6 +3,7 @@
 
 #include<QGraphicsScene>
 #include<Tank.h>
+#include <QTimer>
 
 class Scene : public QGraphicsScene
 {
@@ -10,6 +11,7 @@ class Scene : public QGraphicsScene
 public:
     explicit Scene(QGraphicsScene *parent = nullptr);
     Tank *tank;
+    void startGame();
 signals:
 
 };

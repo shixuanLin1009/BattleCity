@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include<Scene.h>
+#include<GameOn.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -14,8 +16,13 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    Scene *scene;
+    GameOn *gameon;
+private slots:
+    void on_startGameButton_clicked();
+
 private:
     Ui::Widget *ui;
+    Scene *scene;
+
 };
 #endif // WIDGET_H
