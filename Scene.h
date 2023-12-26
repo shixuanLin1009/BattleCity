@@ -14,6 +14,10 @@ public:
     void startGame();
 signals:
 
+
+    // QGraphicsScene interface
+protected:
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // SCENE_H

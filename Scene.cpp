@@ -5,9 +5,28 @@
 Scene::Scene(QGraphicsScene *parent)
     : QGraphicsScene{parent},tank(new Tank)
 {
-//    addItem(tank);
+    addItem(tank);
 }
 void Scene::startGame()
 {
+
+}
+
+void Scene::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_Left:
+        tank->moveBy(-10, 0);
+        break;
+    case Qt::Key_Right:
+        tank->moveBy(10, 0);
+        break;
+    case Qt::Key_Up:
+        tank->moveBy(0, -10);
+        break;
+    case Qt::Key_Down:
+        tank->moveBy(0, 10);
+        break;
+    }
 
 }
