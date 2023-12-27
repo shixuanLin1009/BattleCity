@@ -4,6 +4,7 @@
 #include<QGraphicsScene>
 #include<Tank.h>
 #include <QTimer>
+#include<Bullet.h>
 
 class Scene : public QGraphicsScene
 {

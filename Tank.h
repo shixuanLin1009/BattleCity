@@ -9,6 +9,9 @@ class Tank:public QGraphicsRectItem
 {
 public:
     Tank(QGraphicsRectItem *parent=nullptr);
+
+private:
+    void fire();
 };
 
 #endif // TANK_H

@@ -27,6 +27,10 @@ void Scene::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Down:
         tank->moveBy(0, 10);
         break;
+    case Qt::Key_Space:
+        Bullet  *bullet= new Bullet();
+        bullet->setPos(tank->x(),tank->y());
+        addItem(bullet);
     }
 
 }
