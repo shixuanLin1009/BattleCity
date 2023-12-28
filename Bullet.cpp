@@ -1,5 +1,7 @@
 #include "Bullet.h"
-
+#include <QGraphicsScene>
+#include<Obstacle.h>
+#include<QList>
 Bullet::Bullet(QObject *parent,QGraphicsRectItem *parent_1,int bulletDirection)
     : QObject{parent},QGraphicsRectItem {parent_1}
 {
@@ -29,6 +31,21 @@ void Bullet::shot()
     if (BulletDirection == 3){
             moveBy(-10,0);//down
     }
-    //if(x()<-400||x()>400||y()>300||y()<-300)
+    QList <QGraphicsItem *>  colliding_itmes = collidingItems();
+
+    for(int i = 0,n =colliding_itmes.size();i<n;i++){
+
+            if (typeid (*colliding_itmes[i]) == typeid(Obstacle)){
+                scene()->removeItem(this);
+                delete this;
+                qDebug() <<"Bullet deleted";
+                return;
+            }
+    }
+    /*if(x()<-400||x()>400||y()>300||y()<-300){
+            scene()->removeItem(this);
+            delete this;
+            qDebug() <<"Bullet deleted";
+    }*/
 }
 
