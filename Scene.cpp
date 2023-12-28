@@ -116,7 +116,7 @@ if(event->key()==Qt::Key_Down&&pos.y()<220){
     tank->moveBy(0,10);
     tank->setDirection(2);
 }
-if(event->key()==Qt::Key_8){
+if(event->key()==Qt::Key_Space){
     Bullet *bullet = new Bullet(nullptr,nullptr,dir);
     bullet->setPos(pos+QPoint(20,0));
     addItem(bullet);
