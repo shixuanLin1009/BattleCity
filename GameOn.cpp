@@ -14,6 +14,8 @@ GameOn::GameOn(QWidget *parent) :
     ui->graphicsView ->setFixedSize(800,600);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scene->addLine(-400,0,400,0,QPen(Qt::blue));
+    scene->addLine(0,-300,0,300,QPen(Qt::red));
 }
 
 GameOn::~GameOn()
