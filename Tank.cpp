@@ -25,7 +25,6 @@ void Tank::checkColliging(QPointF pos)
     for(int i = 0,n =colliding_itmes.size();i<n;i++){
        if (typeid (*colliding_itmes[i]) == typeid(Obstacle)){
            setPos(pos);
-           delete colliding_itmes[i];
            return;
         }
     }
