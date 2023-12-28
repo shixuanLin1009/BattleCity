@@ -5,5 +5,9 @@
         <file>Player1_Down.png</file>
         <file>Player1_Left.png</file>
         <file>Player1_Right.png</file>
+        <file>Bullet_Down.png</file>
+        <file>Bullet_Left.png</file>
+        <file>Bullet_Right.png</file>
+        <file>Bullet_Up.png</file>
     </qresource>
 </RCC>

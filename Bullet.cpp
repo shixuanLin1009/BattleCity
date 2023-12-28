@@ -1,11 +1,12 @@
 #include "Bullet.h"
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include<Obstacle.h>
 #include<QList>
-Bullet::Bullet(QObject *parent,QGraphicsRectItem *parent_1,int bulletDirection)
-    : QObject{parent},QGraphicsRectItem {parent_1}
+Bullet::Bullet(QObject *parent,QGraphicsPixmapItem *parent_1,int bulletDirection)
+    : QObject{parent},QGraphicsPixmapItem {parent_1}
 {
-    setRect(0,0,50,50);
+
     timer = new QTimer();
     connect(timer,&QTimer::timeout,this,&Bullet::shot);
     timer->start(50);
@@ -21,15 +22,19 @@ void Bullet::shot()
 {
     if (BulletDirection == 0){
             moveBy(0,-10);//up
+            setPixmap(QPixmap(":/img/Bullet_Up.png").scaled(40,40));
         }
     if (BulletDirection == 1){
             moveBy(10,0);//right
+            setPixmap(QPixmap(":/img/Bullet_Right.png").scaled(40,40));
     }
     if (BulletDirection == 2){
-            moveBy(0,10);//left
+            moveBy(0,10);//down
+            setPixmap(QPixmap(":/img/Bullet_Down.png").scaled(40,40));
     }
     if (BulletDirection == 3){
-            moveBy(-10,0);//down
+            moveBy(-10,0);//left
+            setPixmap(QPixmap(":/img/Bullet_Left.png").scaled(40,40));
     }
     QList <QGraphicsItem *>  colliding_itmes = collidingItems();
 
