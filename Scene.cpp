@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Enemy.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 
@@ -9,10 +10,13 @@ Scene::Scene(QGraphicsScene *parent)
     score=0;
     bestScore=0;
     addItem(tank);
+    spawnEnemies();
+    moveTimer = new QTimer(this);
+    connect(moveTimer, &QTimer::timeout, this, &Scene::updateEnemies);
+    moveTimer->start(200); // Update every 200 milliseconds
 }
 void Scene::startGame()
 {
-
 }
 
 
@@ -69,6 +73,26 @@ scoreTextItem->setPos(QPoint(0,0) -
                       QPoint(gameOverItem->boundingRect().width()/2,
                              -gameOverItem->boundingRect().height()/2));
 
+}
+
+void Scene::spawnEnemies() {
+Enemy *enemy1 = new Enemy(3);
+enemy1->setPos(width() - 200, 100);
+addItem(enemy1);
+enemies.append(enemy1);
+
+Enemy *enemy2 = new Enemy(4);
+enemy2->setPos(width() - 100, 150);
+addItem(enemy2);
+enemies.append(enemy2);
+
+}
+
+
+void Scene::updateEnemies() {
+for (auto *enemy : enemies) {
+    enemy->move();
+}
 }
 
 //void Scene::pause()

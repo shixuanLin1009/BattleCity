@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     Bullet.cpp \
     BulletAbility.cpp \
+    Enemy.cpp \
     GameOn.cpp \
     Scene.cpp \
     Tank.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 HEADERS += \
     Bullet.h \
     BulletAbility.h \
+    Enemy.h \
     GameOn.h \
     Scene.h \
     Tank.h \
@@ -35,4 +37,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    Enemy/Enemy.qrc \
+    Obstacles/Obstacles.qrc \
     image.qrc

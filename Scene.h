@@ -3,6 +3,7 @@
 
 #include<QGraphicsScene>
 #include<Tank.h>
+#include<Enemy.h>
 #include <QTimer>
 #include<Bullet.h>
 
@@ -14,6 +15,8 @@ public:
     Tank *tank;
     void startGame();
     void incrementScore();
+    void spawnEnemies();
+    void updateEnemies();
 signals:
 
 
@@ -26,6 +29,8 @@ private:
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;
+    QTimer *moveTimer;
+    QList<Enemy*> enemies;
 
     int scoreArray[1000];
     int score;
