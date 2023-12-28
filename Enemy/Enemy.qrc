@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/Enemy">
+        <file>ArmorTank.png</file>
+        <file>FastTank.png</file>
+        <file>NormalTank.png</file>
+        <file>PowerTank.png</file>
+    </qresource>
+</RCC>

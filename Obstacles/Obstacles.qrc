@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/Obstacles">
+        <file>Base.png</file>
+        <file>Ice.png</file>
+        <file>Lava.png</file>
+        <file>Steel.png</file>
+        <file>Stone.png</file>
+        <file>Tree_1.png</file>
+        <file>Tree_2.png</file>
+        <file>Water.png</file>
+    </qresource>
+</RCC>
