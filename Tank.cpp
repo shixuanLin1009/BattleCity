@@ -1,9 +1,10 @@
 #include "Tank.h"
 
-Tank::Tank(QGraphicsRectItem *parent ,int tankDirection)
-    :QGraphicsRectItem{parent}
+Tank::Tank(QGraphicsPixmapItem *parent ,int tankDirection)
+    :QGraphicsPixmapItem{parent}
 {
-    setRect(100,-100,100,100);
+    setPixmap(QPixmap(":/img/Player1_Up.png").scaled(80,80));
+    setPos(100,100);
 }
 
 void Tank::setDirection(int Direction)

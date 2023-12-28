@@ -127,5 +127,5 @@ void Scene::incrementScore()
 score++;
 if (score > bestScore) {
     bestScore = score;
-}
+    }
 }

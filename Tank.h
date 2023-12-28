@@ -3,12 +3,12 @@
 
 #include <QObject>
 #include <QWidget>
-#include<QGraphicsRectItem>
+#include<QGraphicsPixmapItem>
 
-class Tank:public QGraphicsRectItem
+class Tank:public QGraphicsPixmapItem
 {
 public:
-    Tank(QGraphicsRectItem *parent=nullptr,int tankDirection=0);
+    Tank(QGraphicsPixmapItem *parent=nullptr,int tankDirection=0);
     void setDirection(int Direction);
     int getDirection();
 private:
