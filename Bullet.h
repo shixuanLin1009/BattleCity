@@ -7,11 +7,12 @@
 #include<QTimer>
 #include<Tank.h>
 
-class Bullet : public QObject,public QGraphicsRectItem
+class Bullet : public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    explicit Bullet(QObject *parent = nullptr,QGraphicsRectItem *parent_1 = nullptr,int bulletDirection=0);
+public:
+    explicit Bullet(QObject *parent = nullptr,QGraphicsPixmapItem *parent_1 = nullptr,int bulletDirection=0);
     ~Bullet();
 public slots:
     void shot();
