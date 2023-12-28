@@ -1,6 +1,7 @@
 #include "Bullet.h"
 #include <QGraphicsScene>
 #include<Obstacle.h>
+#include<Enemy.h>
 #include<QList>
 Bullet::Bullet(QObject *parent,QGraphicsRectItem *parent_1,int bulletDirection)
     : QObject{parent},QGraphicsRectItem {parent_1}
@@ -26,10 +27,10 @@ void Bullet::shot()
             moveBy(10,0);//right
     }
     if (BulletDirection == 2){
-            moveBy(0,10);//left
+            moveBy(0,10);//down
     }
     if (BulletDirection == 3){
-            moveBy(-10,0);//down
+            moveBy(-10,0);//left
     }
     QList <QGraphicsItem *>  colliding_itmes = collidingItems();
 
@@ -39,6 +40,16 @@ void Bullet::shot()
                 scene()->removeItem(this);
                 delete this;
                 qDebug() <<"Bullet deleted";
+                return;
+            }
+            if (typeid (*colliding_itmes[i]) == typeid(Enemy)){
+                emit bulletHitsEnemv();
+                scene()->removeItem(colliding_itmes[i]);
+                scene()->removeItem(this);
+                delete colliding_itmes[i];
+                delete this;
+                qDebug() <<"Bullet deleted";
+                qDebug() <<"Enemy deleted";
                 return;
             }
     }

@@ -248,6 +248,7 @@ if(event->key()==Qt::Key_Down&&pos.y()<220){
 }
 if(event->key()==Qt::Key_Space){
     Bullet *bullet = new Bullet(nullptr,nullptr,dir);
+    connect(bullet,&Bullet::bulletHitsEnemv,this,&Scene::incrementScore);
     bullet->setPos(pos);
     addItem(bullet);
 }
