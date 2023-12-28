@@ -196,22 +196,26 @@ if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
 QGraphicsScene::keyPressEvent(event);
 
 //tank move
-QPointF pos = tank->pos();
+QPointF pos=tank->pos();
 if(event->key()==Qt::Key_Left&&pos.x()>-400){
     tank->moveBy(-10,0);
     tank->setDirection(3);
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Right&&pos.x()<320){
     tank->moveBy(10,0);
     tank->setDirection(1);
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Up&&pos.y()>-300){
     tank->moveBy(0,-10);
     tank->setDirection(0);
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Down&&pos.y()<220){
     tank->moveBy(0,10);
     tank->setDirection(2);
+   tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Space){
     Bullet *bullet = new Bullet(nullptr,nullptr,dir);
