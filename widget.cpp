@@ -20,3 +20,4 @@ void Widget::on_startGameButton_clicked()
     GameOn* b = new GameOn();
     b->show();
 }
+
