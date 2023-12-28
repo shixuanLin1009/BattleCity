@@ -84,12 +84,12 @@ void Scene::spawnEnemies() {
 Enemy *enemy1 = new Enemy(3);
 enemy1->setPos(width() - 200, 100);
 addItem(enemy1);
-enemies.append(enemy1);
+//enemies.append(enemy1);
 
 Enemy *enemy2 = new Enemy(4);
 enemy2->setPos(width() - 100, 150);
 addItem(enemy2);
-enemies.append(enemy2);
+//enemies.append(enemy2);
 
 }
 
