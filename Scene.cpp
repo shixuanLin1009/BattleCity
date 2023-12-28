@@ -29,7 +29,7 @@ void Scene::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Space:
         Bullet  *bullet= new Bullet();
-        bullet->setPos(tank->x(),tank->y());
+        bullet->setPos(tank->x()+50,tank->y()-50);
         addItem(bullet);
     }
 
