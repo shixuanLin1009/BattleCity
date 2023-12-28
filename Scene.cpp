@@ -9,6 +9,7 @@ Scene::Scene(QGraphicsScene *parent)
     score=0;
     bestScore=0;
     addItem(tank);
+    tank->setPos(0,220);
     showMap();
 
 }
@@ -77,18 +78,94 @@ void Scene::showMap()
 {
     int j=0;
     int k=0;
-    for(int i=0;i<=800;i+=40){
+    int l=0;
+    int m=0;
+    for(int i=0;i<=760;i+=40){
 
-    Obstacle *j = new Obstacle();
-    j->setPos(-400+i,260);
-    addItem(j);
-    j++;
-    Obstacle *k = new Obstacle();
-    k->setPos(-400+i,-300);
-    addItem(k);
-    k++;
+        Obstacle *j = new Obstacle();
+        j->setPos(-400+i,260);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(-400+i,-300);
+        addItem(k);
+        k++;
 
     }
+
+    for(int i=0;i<=560;i+=40){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(-400,-300+i);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(360,-300+i);
+        addItem(k);
+        k++;
+
+    }
+
+    for(int i=0;i<=680;i+=120){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(-320+i,-220);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(-320+i,-180);
+        addItem(k);
+        k++;
+        Obstacle *l = new Obstacle();
+        l->setPos(-320+i,-140);
+        addItem(l);
+        l++;
+        Obstacle *m = new Obstacle();
+        m->setPos(-320+i,-100);
+        addItem(m);
+        m++;
+    }
+
+    for(int i=0;i<=120;i+=120){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(-320+i,60);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(-320+i,100);
+        addItem(k);
+        k++;
+        Obstacle *l = new Obstacle();
+        l->setPos(-320+i,140);
+        addItem(l);
+        l++;
+        Obstacle *m = new Obstacle();
+        m->setPos(-320+i,180);
+        addItem(m);
+        m++;
+    }
+
+    for(int i=0;i<=120;i+=120){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(160+i,60);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(160+i,100);
+        addItem(k);
+        k++;
+        Obstacle *l = new Obstacle();
+        l->setPos(160+i,140);
+        addItem(l);
+        l++;
+        Obstacle *m = new Obstacle();
+        m->setPos(160+i,180);
+        addItem(m);
+        m++;
+    }
+
 
 }
 //void Scene::pause()
