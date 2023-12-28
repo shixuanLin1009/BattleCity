@@ -8,6 +8,7 @@ Bullet::Bullet(QObject *parent,QGraphicsRectItem *parent_1,int bulletDirection)
     connect(timer,&QTimer::timeout,this,&Bullet::shot);
     timer->start(50);
     BulletDirection =bulletDirection;
+
 }
 
 Bullet::~Bullet()
@@ -28,5 +29,6 @@ void Bullet::shot()
     if (BulletDirection == 3){
             moveBy(-10,0);//down
     }
+    //if(x()<-400||x()>400||y()>300||y()<-300)
 }
 

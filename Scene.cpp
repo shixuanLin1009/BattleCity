@@ -10,10 +10,14 @@ Scene::Scene(QGraphicsScene *parent)
     score=0;
     bestScore=0;
     addItem(tank);
+
     spawnEnemies();
     moveTimer = new QTimer(this);
     connect(moveTimer, &QTimer::timeout, this, &Scene::updateEnemies);
     moveTimer->start(200); // Update every 200 milliseconds
+
+    tank->setPos(0,220);
+    showMap();
 }
 void Scene::startGame()
 {
@@ -75,6 +79,7 @@ scoreTextItem->setPos(QPoint(0,0) -
 
 }
 
+
 void Scene::spawnEnemies() {
 Enemy *enemy1 = new Enemy(3);
 enemy1->setPos(width() - 200, 100);
@@ -94,7 +99,100 @@ for (auto *enemy : enemies) {
     enemy->move();
 }
 }
+void Scene::showMap()
+{
+    int j=0;
+    int k=0;
+    int l=0;
+    int m=0;
+    for(int i=0;i<=760;i+=40){
 
+        Obstacle *j = new Obstacle();
+        j->setPos(-400+i,260);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(-400+i,-300);
+        addItem(k);
+        k++;
+
+    }
+
+    for(int i=0;i<=560;i+=40){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(-400,-300+i);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(360,-300+i);
+        addItem(k);
+        k++;
+
+    }
+
+    for(int i=0;i<=680;i+=120){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(-320+i,-220);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(-320+i,-180);
+        addItem(k);
+        k++;
+        Obstacle *l = new Obstacle();
+        l->setPos(-320+i,-140);
+        addItem(l);
+        l++;
+        Obstacle *m = new Obstacle();
+        m->setPos(-320+i,-100);
+        addItem(m);
+        m++;
+    }
+
+    for(int i=0;i<=120;i+=120){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(-320+i,60);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(-320+i,100);
+        addItem(k);
+        k++;
+        Obstacle *l = new Obstacle();
+        l->setPos(-320+i,140);
+        addItem(l);
+        l++;
+        Obstacle *m = new Obstacle();
+        m->setPos(-320+i,180);
+        addItem(m);
+        m++;
+    }
+
+    for(int i=0;i<=120;i+=120){
+
+        Obstacle *j = new Obstacle();
+        j->setPos(160+i,60);
+        addItem(j);
+        j++;
+        Obstacle *k = new Obstacle();
+        k->setPos(160+i,100);
+        addItem(k);
+        k++;
+        Obstacle *l = new Obstacle();
+        l->setPos(160+i,140);
+        addItem(l);
+        l++;
+        Obstacle *m = new Obstacle();
+        m->setPos(160+i,180);
+        addItem(m);
+        m++;
+    }
+
+
+}
 //void Scene::pause()
 //{
 //enemy->freeze();
@@ -123,24 +221,28 @@ if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
 QGraphicsScene::keyPressEvent(event);
 
 //tank move
-QPointF pos = tank->pos();
+QPointF pos=tank->pos();
 if(event->key()==Qt::Key_Left&&pos.x()>-400){
     tank->moveBy(-10,0);
     tank->setDirection(3);
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Right&&pos.x()<320){
     tank->moveBy(10,0);
     tank->setDirection(1);
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Up&&pos.y()>-300){
     tank->moveBy(0,-10);
     tank->setDirection(0);
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Down&&pos.y()<220){
     tank->moveBy(0,10);
     tank->setDirection(2);
+   tank->checkColliging(pos);
 }
-if(event->key()==Qt::Key_8){
+if(event->key()==Qt::Key_Space){
     Bullet *bullet = new Bullet(nullptr,nullptr,dir);
     bullet->setPos(pos+QPoint(20,0));
     addItem(bullet);
