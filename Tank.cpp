@@ -3,7 +3,7 @@
 Tank::Tank(QGraphicsPixmapItem *parent ,int tankDirection)
     :QGraphicsPixmapItem{parent}
 {
-    setPixmap(QPixmap(":/img/Player1_Up.png").scaled(80,80));
+    setPixmap(QPixmap(":/img/Player1_Up.png").scaled(40,40));
     setPos(0,0);
 }
 
