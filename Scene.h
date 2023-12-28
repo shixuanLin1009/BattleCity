@@ -4,6 +4,7 @@
 #include<QGraphicsScene>
 #include<Tank.h>
 #include <QTimer>
+#include<Bullet.h>
 
 class Scene : public QGraphicsScene
 {
@@ -14,6 +15,7 @@ public:
     void startGame();
     void incrementScore();
 signals:
+
 
 private:
     void pause();
@@ -30,8 +32,6 @@ private:
     int bestScore;
 protected:
     void keyPressEvent(QKeyEvent *event);
-//    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
 };
 
 #endif // SCENE_H

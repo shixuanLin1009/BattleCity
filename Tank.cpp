@@ -1,7 +1,17 @@
 #include "Tank.h"
 
-Tank::Tank(QGraphicsRectItem *parent)
-:QGraphicsRectItem{parent}
+Tank::Tank(QGraphicsRectItem *parent ,int tankDirection)
+    :QGraphicsRectItem{parent}
 {
-    setRect(200,-100,100,100);
+    setRect(100,-100,100,100);
+}
+
+void Tank::setDirection(int Direction)
+{
+    tankDirection = Direction;
+}
+
+int Tank::getDirection()
+{
+    return tankDirection;
 }
