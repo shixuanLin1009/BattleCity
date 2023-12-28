@@ -200,22 +200,26 @@ QPointF pos=tank->pos();
 if(event->key()==Qt::Key_Left&&pos.x()>-400){
     tank->moveBy(-10,0);
     tank->setDirection(3);
+    tank->setPixmap(QPixmap(":/img/Player1_Left.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Right&&pos.x()<320){
     tank->moveBy(10,0);
     tank->setDirection(1);
+    tank->setPixmap(QPixmap(":/img/Player1_Right.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Up&&pos.y()>-300){
     tank->moveBy(0,-10);
     tank->setDirection(0);
+    tank->setPixmap(QPixmap(":/img/Player1_Up.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Down&&pos.y()<220){
     tank->moveBy(0,10);
     tank->setDirection(2);
-   tank->checkColliging(pos);
+    tank->setPixmap(QPixmap(":/img/Player1_Down.png").scaled(40,40));
+    tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Space){
     Bullet *bullet = new Bullet(nullptr,nullptr,dir);
