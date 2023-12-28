@@ -128,3 +128,4 @@ score++;
 if (score > bestScore) {
     bestScore = score;
 }
+}
