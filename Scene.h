@@ -1,6 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "Obstacle.h"
 #include<QGraphicsScene>
 #include<Tank.h>
 #include <QTimer>
@@ -20,6 +21,7 @@ signals:
 private:
     void pause();
     void play();
+    void showMap();
     void showPauseGraphics();
     void hidePauseGraphics();
     void gameOverGSraphics();

@@ -12,6 +12,7 @@ SOURCES += \
     Bullet.cpp \
     BulletAbility.cpp \
     GameOn.cpp \
+    Obstacle.cpp \
     Scene.cpp \
     Tank.cpp \
     main.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     Bullet.h \
     BulletAbility.h \
     GameOn.h \
+    Obstacle.h \
     Scene.h \
     Tank.h \
     widget.h
