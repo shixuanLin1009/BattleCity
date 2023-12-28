@@ -19,6 +19,7 @@ signals:
     // QGraphicsScene interface
 protected:
     void keyPressEvent(QKeyEvent *event);
+private:
 };
 
 #endif // SCENE_H
