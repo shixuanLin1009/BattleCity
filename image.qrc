@@ -2,5 +2,8 @@
     <qresource prefix="/img">
         <file>Player1_Up.png</file>
         <file>Stone.png</file>
+        <file>Player1_Down.png</file>
+        <file>Player1_Left.png</file>
+        <file>Player1_Right.png</file>
     </qresource>
 </RCC>
