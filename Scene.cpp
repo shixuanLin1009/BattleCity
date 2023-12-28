@@ -9,6 +9,8 @@ Scene::Scene(QGraphicsScene *parent)
     score=0;
     bestScore=0;
     addItem(tank);
+    showMap();
+
 }
 void Scene::startGame()
 {
@@ -71,6 +73,24 @@ scoreTextItem->setPos(QPoint(0,0) -
 
 }
 
+void Scene::showMap()
+{
+    int j=0;
+    int k=0;
+    for(int i=0;i<=800;i+=40){
+
+    Obstacle *j = new Obstacle();
+    j->setPos(-400+i,260);
+    addItem(j);
+    j++;
+    Obstacle *k = new Obstacle();
+    k->setPos(-400+i,-300);
+    addItem(k);
+    k++;
+
+    }
+
+}
 //void Scene::pause()
 //{
 //enemy->freeze();
