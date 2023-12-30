@@ -7,6 +7,7 @@
 #include<Enemy.h>
 #include <QTimer>
 #include<Bullet.h>
+#include<Base.h>
 
 class Scene : public QGraphicsScene
 {
@@ -19,25 +20,31 @@ public:
     void incrementScore();
     void spawnEnemies();
     void updateEnemies();
+    void tankDestroyed();
 signals:
-
+    void gamePause();
+    void gamePlay();
 
 private:
-    void pause();
+    bool pause;
     void play();
     void showMap();
     void showPauseGraphics();
     void hidePauseGraphics();
-    void gameOverGSraphics();
+    void gameOverGraphics();
+    void showBase();
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;
     QTimer *moveTimer;
+    QTimer *spawnTimer;
     QList<Enemy*> enemies;
+    Base *base;
     int option;
     int scoreArray[1000];
     int score;
     int bestScore;
+    int tank_destroyed;
 protected:
     void keyPressEvent(QKeyEvent *event);
 };

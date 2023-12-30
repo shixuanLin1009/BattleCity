@@ -5,6 +5,7 @@
 #include<Enemy.h>
 #include<QList>
 #include<Tank.h>
+#include <Scene.h>
 Bullet::Bullet(QObject *parent,QGraphicsPixmapItem *parent_1,int bulletDirection)
     : QObject{parent},QGraphicsPixmapItem {parent_1}
 {
@@ -38,6 +39,16 @@ void Bullet::shot()
             moveBy(-10,0);//left
             setPixmap(QPixmap(":/img/Bullet_Left.png").scaled(40,40));
     }
+    check_colliding_itmes();
+    /*if(x()<-400||x()>400||y()>300||y()<-300){
+            scene()->removeItem(this);
+            delete this;
+            qDebug() <<"Bullet deleted";
+    }*/
+}
+
+void Bullet::check_colliding_itmes()
+{
     QList <QGraphicsItem *>  colliding_itmes = collidingItems();
 
     for(int i = 0,n =colliding_itmes.size();i<n;i++){
@@ -48,8 +59,17 @@ void Bullet::shot()
                 qDebug() <<"Bullet deleted";
                 return;
             }
+            if (typeid (*colliding_itmes[i]) == typeid(Steel)){
+                scene()->removeItem(colliding_itmes[i]);
+                scene()->removeItem(this);
+                delete colliding_itmes[i];
+                delete this;
+                qDebug() <<"Bullet deleted";
+                return;
+            }
             if (typeid (*colliding_itmes[i]) == typeid(Enemy)){
                 emit bulletHitsEnemv();
+
                 scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
                 delete colliding_itmes[i];
@@ -59,11 +79,6 @@ void Bullet::shot()
                 return;
             }
     }
-    /*if(x()<-400||x()>400||y()>300||y()<-300){
-            scene()->removeItem(this);
-            delete this;
-            qDebug() <<"Bullet deleted";
-    }*/
 }
 
 
@@ -100,6 +115,12 @@ void EnemyBullet::shot()
             moveBy(-10,0);//left
             setPixmap(QPixmap(":/img/Bullet_Left.png").scaled(40,40));
     }
+    check_colliding_itmes();
+
+}
+
+void EnemyBullet::check_colliding_itmes()
+{
     QList <QGraphicsItem *>  colliding_itmes = collidingItems();
 
     for(int i = 0,n =colliding_itmes.size();i<n;i++){
@@ -110,13 +131,22 @@ void EnemyBullet::shot()
                 qDebug() <<"Bullet deleted";
                 return;
             }
+            if (typeid (*colliding_itmes[i]) == typeid(Steel)){
+                scene()->removeItem(colliding_itmes[i]);
+                scene()->removeItem(this);
+                delete colliding_itmes[i];
+                delete this;
+                qDebug() <<"Bullet deleted";
+                return;
+            }
             if (typeid (*colliding_itmes[i]) == typeid(Tank)){
+                emit bulletHitsTank();
                 scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
                 //delete colliding_itmes[i];
                 delete this;
                 qDebug() <<"Bullet deleted";
-                qDebug() <<"Enemy deleted";
+                qDebug() <<"Tank deleted";
                 return;
             }
     }
