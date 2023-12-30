@@ -52,6 +52,7 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
 
     QPixmap scaledPixmap = originalPixmap.scaled(40, 40, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     setPixmap(scaledPixmap);
+
 }
 
 Enemy::~Enemy()
@@ -62,9 +63,11 @@ Enemy::~Enemy()
 
 void Enemy::shoot()
 {
+
     Bullet *bullet=new EnemyBullet(nullptr,nullptr,Dir);
     bullet->setPos(this->pos());
     scene()->addItem(bullet);
+    connect(bullet, &EnemyBullet::bulletHitsTank, this, &Enemy::enemyWin);
 }
 
 void Enemy::move() {
@@ -98,9 +101,15 @@ void Enemy::move() {
         }
     }
 
-
 }
-
+void Enemy::pause(){
+    moveTimer->stop();
+    shootTimer->stop();
+}
+void Enemy::play(){
+    moveTimer->start(1000);
+    shootTimer->start(500);
+}
 void Enemy::RandomDirection() {
     int randomDirection = QRandomGenerator::global()->bounded(0, 4);
     direction = static_cast<Direction>(randomDirection);
@@ -159,4 +168,9 @@ void Enemy::setDirection(Direction newDirection) {
 
 Enemy::Direction Enemy::getDirection() const {
     return direction;
+}
+
+void Enemy::enemyWin() {
+    qDebug() << "Tank destroyed";
+    emit tankDestroyed();
 }

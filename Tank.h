@@ -15,6 +15,7 @@ public:
     void checkColliging(QPointF pos);
 signals:
     void tankHitsObstacle();
+    void destroyed();
 private:
     void fire();
     int tankDirection;

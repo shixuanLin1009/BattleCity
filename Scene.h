@@ -20,16 +20,18 @@ public:
     void incrementScore();
     void spawnEnemies();
     void updateEnemies();
+    void tankDestroyed();
 signals:
-
+    void gamePause();
+    void gamePlay();
 
 private:
-    void pause();
+    bool pause;
     void play();
     void showMap();
     void showPauseGraphics();
     void hidePauseGraphics();
-    void gameOverGSraphics();
+    void gameOverGraphics();
     void showBase();
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
@@ -42,6 +44,7 @@ private:
     int scoreArray[1000];
     int score;
     int bestScore;
+    int tank_destroyed;
 protected:
     void keyPressEvent(QKeyEvent *event);
 };
