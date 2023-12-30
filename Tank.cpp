@@ -1,4 +1,5 @@
 #include "Tank.h"
+#include "BulletAbility.h"
 #include"Obstacle.h"
 #include<QList>
 Tank::Tank(QGraphicsPixmapItem *parent ,int tankDirection)
