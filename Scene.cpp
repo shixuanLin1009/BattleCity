@@ -90,12 +90,12 @@ void Scene::spawnEnemies() {
 Enemy *enemy1 = new Enemy(3);
 enemy1->setPos(width() - 200, 100);
 addItem(enemy1);
-enemies.append(enemy1);
+//enemies.append(enemy1);
 
 Enemy *enemy2 = new Enemy(4);
 enemy2->setPos(width() - 100, 150);
 addItem(enemy2);
-enemies.append(enemy2);
+//enemies.append(enemy2);
 
 }
 
@@ -229,26 +229,27 @@ QGraphicsScene::keyPressEvent(event);
 //tank move
 int dir=tank->getDirection();
 QPointF pos=tank->pos();
+int step=20;
 if(event->key()==Qt::Key_Left&&pos.x()>-400){
-    tank->moveBy(-10,0);
+    tank->moveBy(-step,0);
     tank->setDirection(3);
     tank->setPixmap(QPixmap(":/img/Player1_Left.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Right&&pos.x()<320){
-    tank->moveBy(10,0);
+    tank->moveBy(step,0);
     tank->setDirection(1);
     tank->setPixmap(QPixmap(":/img/Player1_Right.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Up&&pos.y()>-300){
-    tank->moveBy(0,-10);
+    tank->moveBy(0,-step);
     tank->setDirection(0);
     tank->setPixmap(QPixmap(":/img/Player1_Up.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Down&&pos.y()<220){
-    tank->moveBy(0,10);
+    tank->moveBy(0,step);
     tank->setDirection(2);
     tank->setPixmap(QPixmap(":/img/Player1_Down.png").scaled(40,40));
     tank->checkColliging(pos);
