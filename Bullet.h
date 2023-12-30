@@ -17,6 +17,7 @@ public slots:
     virtual void shot();
 signals:
     void  bulletHitsEnemv();
+    void  bulletHitsTank();
 private:
     QTimer *timer;
     int BulletDirection;//up=0,right=1 down=2 left=4

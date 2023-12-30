@@ -5,6 +5,7 @@
 #include<Enemy.h>
 #include<QList>
 #include<Tank.h>
+#include <Scene.h>
 Bullet::Bullet(QObject *parent,QGraphicsPixmapItem *parent_1,int bulletDirection)
     : QObject{parent},QGraphicsPixmapItem {parent_1}
 {
@@ -50,6 +51,7 @@ void Bullet::shot()
             }
             if (typeid (*colliding_itmes[i]) == typeid(Enemy)){
                 emit bulletHitsEnemv();
+
                 scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
                 delete colliding_itmes[i];
@@ -111,12 +113,13 @@ void EnemyBullet::shot()
                 return;
             }
             if (typeid (*colliding_itmes[i]) == typeid(Tank)){
+                emit bulletHitsTank();
                 scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
                 //delete colliding_itmes[i];
                 delete this;
                 qDebug() <<"Bullet deleted";
-                qDebug() <<"Enemy deleted";
+                qDebug() <<"Tank deleted";
                 return;
             }
     }

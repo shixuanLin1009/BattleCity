@@ -12,10 +12,11 @@ class Enemy : public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-
+    void pause();
+    void play();
     explicit Enemy(int type = 0,QObject *parent_1 = nullptr, QGraphicsPixmapItem *parent_2 = nullptr);
     ~Enemy();
-
+    void enemyWin();
     enum Direction { Up, Down, Left, Right };
     void setEnemyPixmap(const QPixmap &pixmap);
     void move();
@@ -28,6 +29,8 @@ public:
 
 public slots:
     void shoot();
+signals:
+    void tankDestroyed();
 
 private:
     int enemyType;
