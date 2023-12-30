@@ -131,13 +131,13 @@ void Scene::showBase()
 void Scene::spawnEnemies() {
     int ran= QRandomGenerator::global()->bounded(0, 4);
     int ran_2= QRandomGenerator::global()->bounded(0, 4);
-    Enemy *a = new Enemy(ran);
-    a->setPos(-240, -260);
-    addItem(a);
+    Enemy *enemy1 = new Enemy(ran);
+    enemy1->setPos(-240, -260);
+    addItem(enemy1);
 
-    Enemy *b = new Enemy(ran_2);
-    b->setPos(240, -220);
-    addItem(b);
+    Enemy *enemy2 = new Enemy(ran_2);
+    enemy2->setPos(240, -220);
+    addItem(enemy2);
 
 }
 
