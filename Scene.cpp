@@ -85,6 +85,45 @@ scoreTextItem->setPos(QPoint(0,0) -
 
 }
 
+void Scene::showBase()
+{
+    base = new Base();
+    base->setPos(-40,60);
+    addItem(base);
+    //橫的第一列
+    for(int i=0;i<=3;i++)
+    {
+        Steel *j =new Steel();
+        j->setPos(-80+40*i,20);
+        addItem(j);
+        j++;
+    }
+    //橫的第二列
+    for(int i=0;i<=2;i++)
+    {
+        Steel *j =new Steel();
+        j->setPos(-80+40*i,100);
+        addItem(j);
+        j++;
+    }
+    //直的第一列
+    for(int i=0;i<=1;i++)
+    {
+        Steel *j =new Steel();
+        j->setPos(-80,60+40*i);
+        addItem(j);
+        j++;
+    }
+    //直的第二列
+    for(int i=0;i<=1;i++)
+    {
+        Steel *j =new Steel();
+        j->setPos(40,60+40*i);
+        addItem(j);
+        j++;
+    }
+}
+
 
 void Scene::spawnEnemies() {
 Enemy *enemy1 = new Enemy(3);
@@ -107,6 +146,7 @@ for (auto *enemy : enemies) {
 }
 void Scene::showMap()
 {
+    showBase();
     for(int i=0;i<=240;i+=40){
 
         Tree *a = new Tree();

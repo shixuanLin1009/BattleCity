@@ -7,6 +7,7 @@
 #include<Enemy.h>
 #include <QTimer>
 #include<Bullet.h>
+#include<Base.h>
 
 class Scene : public QGraphicsScene
 {
@@ -29,11 +30,13 @@ private:
     void showPauseGraphics();
     void hidePauseGraphics();
     void gameOverGSraphics();
+    void showBase();
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;
     QTimer *moveTimer;
     QList<Enemy*> enemies;
+    Base *base;
     int option;
     int scoreArray[1000];
     int score;
