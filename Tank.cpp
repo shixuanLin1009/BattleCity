@@ -28,5 +28,13 @@ void Tank::checkColliging(QPointF pos)
            setPos(pos);
            return;
         }
+       if (typeid (*colliding_itmes[i]) == typeid(Tree)){
+           setPos(pos);
+           return;
+       }
+       if (typeid (*colliding_itmes[i]) == typeid(Steel)){
+           setPos(pos);
+           return;
+       }
     }
 }

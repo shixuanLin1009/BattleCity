@@ -58,7 +58,7 @@ void Bullet::check_colliding_itmes()
                 qDebug() <<"Bullet deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Tree)){
+            if (typeid (*colliding_itmes[i]) == typeid(Steel)){
                 scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
                 delete colliding_itmes[i];
@@ -129,7 +129,7 @@ void EnemyBullet::check_colliding_itmes()
                 qDebug() <<"Bullet deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Tree)){
+            if (typeid (*colliding_itmes[i]) == typeid(Steel)){
                 scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
                 delete colliding_itmes[i];

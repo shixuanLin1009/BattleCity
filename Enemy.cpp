@@ -16,11 +16,11 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
     QPixmap originalPixmap;
     moveTimer= new QTimer();
     connect(moveTimer,&QTimer::timeout,this,&Enemy::move);
-    moveTimer->start(1000);
+    moveTimer->start(500);
 
     shootTimer = new QTimer();
     connect(shootTimer,&QTimer::timeout,this,&Enemy::shoot);
-    shootTimer->start(500);
+    shootTimer->start(700);
 
     int unit =40;
     //四種敵人之參數
@@ -86,13 +86,23 @@ void Enemy::move() {
             setPos(pos);
             return;
         }
+        if (typeid (*colliding_itmes[i]) == typeid(Tank)){
+            scene()->removeItem(colliding_itmes[i]);
+            scene()->removeItem(this);
+            delete colliding_itmes[i];
+            delete this;
+            qDebug() <<"Bullet deleted";
+            qDebug() <<"Enemy deleted";
+            return;
+            return;
+        }
     }
 
 
 }
 
 void Enemy::RandomDirection() {
-    int randomDirection = QRandomGenerator::global()->bounded(0, 3);
+    int randomDirection = QRandomGenerator::global()->bounded(0, 4);
     direction = static_cast<Direction>(randomDirection);
     Dir=randomDirection;
 }

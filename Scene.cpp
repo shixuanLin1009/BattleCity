@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
+#include<QRandomGenerator>
 
 Scene::Scene(int opt, QGraphicsScene *parent)
     : QGraphicsScene{parent},tank(new Tank)
@@ -10,9 +11,11 @@ Scene::Scene(int opt, QGraphicsScene *parent)
     score=0;
     bestScore=0;
     addItem(tank);
-
+    spawnTimer = new QTimer();
+    connect(spawnTimer,&QTimer::timeout,this,&Scene::spawnEnemies);
+    spawnTimer->start(4000);
     spawnEnemies();
-    moveTimer = new QTimer(this);
+    moveTimer = new QTimer();
     connect(moveTimer, &QTimer::timeout, this, &Scene::updateEnemies);
     moveTimer->start(200); // Update every 200 milliseconds
 
@@ -126,15 +129,15 @@ void Scene::showBase()
 
 
 void Scene::spawnEnemies() {
-Enemy *enemy1 = new Enemy(3);
-enemy1->setPos(width() - 200, 100);
-addItem(enemy1);
-//enemies.append(enemy1);
+    int ran= QRandomGenerator::global()->bounded(0, 4);
+    int ran_2= QRandomGenerator::global()->bounded(0, 4);
+    Enemy *a = new Enemy(ran);
+    a->setPos(-240, -260);
+    addItem(a);
 
-Enemy *enemy2 = new Enemy(4);
-enemy2->setPos(width() - 100, 150);
-addItem(enemy2);
-//enemies.append(enemy2);
+    Enemy *b = new Enemy(ran_2);
+    b->setPos(240, -220);
+    addItem(b);
 
 }
 

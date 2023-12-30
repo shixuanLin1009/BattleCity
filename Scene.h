@@ -35,6 +35,7 @@ private:
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;
     QTimer *moveTimer;
+    QTimer *spawnTimer;
     QList<Enemy*> enemies;
     Base *base;
     int option;
