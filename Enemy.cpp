@@ -10,17 +10,17 @@
 
 
 Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
-    : enemyType(type),QObject {parent_1},QGraphicsPixmapItem{parent_2}
+    : QObject {parent_1},QGraphicsPixmapItem{parent_2},enemyType(type)
 {
 
     QPixmap originalPixmap;
     moveTimer= new QTimer();
     connect(moveTimer,&QTimer::timeout,this,&Enemy::move);
-    moveTimer->start(1000);
+    moveTimer->start(500);
 
     shootTimer = new QTimer();
     connect(shootTimer,&QTimer::timeout,this,&Enemy::shoot);
-    shootTimer->start(500);
+    shootTimer->start(700);
 
     int unit =40;
     //四種敵人之參數
@@ -52,6 +52,7 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
 
     QPixmap scaledPixmap = originalPixmap.scaled(40, 40, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     setPixmap(scaledPixmap);
+
 }
 
 Enemy::~Enemy()
@@ -62,9 +63,11 @@ Enemy::~Enemy()
 
 void Enemy::shoot()
 {
+
     Bullet *bullet=new EnemyBullet(nullptr,nullptr,Dir);
     bullet->setPos(this->pos());
     scene()->addItem(bullet);
+    connect(bullet, &EnemyBullet::bulletHitsTank, this, &Enemy::enemyWin);
 }
 
 void Enemy::move() {
@@ -86,13 +89,29 @@ void Enemy::move() {
             setPos(pos);
             return;
         }
+        if (typeid (*colliding_itmes[i]) == typeid(Tank)){
+            scene()->removeItem(colliding_itmes[i]);
+            scene()->removeItem(this);
+            delete colliding_itmes[i];
+            delete this;
+            qDebug() <<"Bullet deleted";
+            qDebug() <<"Enemy deleted";
+            return;
+            return;
+        }
     }
 
-
 }
-
+void Enemy::pause(){
+    moveTimer->stop();
+    shootTimer->stop();
+}
+void Enemy::play(){
+    moveTimer->start(1000);
+    shootTimer->start(500);
+}
 void Enemy::RandomDirection() {
-    int randomDirection = QRandomGenerator::global()->bounded(0, 3);
+    int randomDirection = QRandomGenerator::global()->bounded(0, 4);
     direction = static_cast<Direction>(randomDirection);
     Dir=randomDirection;
 }
@@ -149,4 +168,9 @@ void Enemy::setDirection(Direction newDirection) {
 
 Enemy::Direction Enemy::getDirection() const {
     return direction;
+}
+
+void Enemy::enemyWin() {
+    qDebug() << "Tank destroyed";
+    emit tankDestroyed();
 }
