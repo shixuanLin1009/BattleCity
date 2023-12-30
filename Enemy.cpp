@@ -10,7 +10,7 @@
 
 
 Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
-    : enemyType(type),QObject {parent_1},QGraphicsPixmapItem{parent_2}
+    : QObject {parent_1},QGraphicsPixmapItem{parent_2},enemyType(type)
 {
 
     QPixmap originalPixmap;

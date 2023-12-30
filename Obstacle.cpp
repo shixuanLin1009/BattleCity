@@ -8,3 +8,13 @@ Obstacle::Obstacle(QGraphicsPixmapItem *parent)
 }
 
 
+
+Tree::Tree()
+{
+    setPixmap(QPixmap(":/Obstacles/Tree_1.png").scaled(40,40));
+}
+
+Steel::Steel()
+{
+    setPixmap(QPixmap(":/Obstacles/Steel.png").scaled(40,40));
+}

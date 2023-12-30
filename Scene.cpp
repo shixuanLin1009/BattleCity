@@ -107,7 +107,14 @@ for (auto *enemy : enemies) {
 }
 void Scene::showMap()
 {
+    for(int i=0;i<=240;i+=40){
 
+        Tree *a = new Tree();
+        a->setPos(-400+i,-60);
+        addItem(a);
+        a++;
+
+    }
     for(int i=0;i<=760;i+=40){
 
         Obstacle *j = new Obstacle();
