@@ -11,7 +11,6 @@ class Bullet : public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-public:
     explicit Bullet(QObject *parent = nullptr,QGraphicsPixmapItem *parent_1 = nullptr,int bulletDirection=0);
     ~Bullet();
 public slots:

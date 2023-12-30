@@ -5,13 +5,17 @@
 #include <QGraphicsEllipseItem>
 #include <QTimer>
 #include <QObject>
+#include<QWidget>
 
-class Enemy : public QGraphicsPixmapItem {
-
+class Enemy : public QObject,public QGraphicsPixmapItem
+{
+    Q_OBJECT
 public:
-    enum Direction { Up, Down, Left, Right };
-    explicit Enemy(int type, QGraphicsItem *parent = nullptr);
 
+    explicit Enemy(int type = 0,QObject *parent_1 = nullptr, QGraphicsPixmapItem *parent_2 = nullptr);
+    ~Enemy();
+
+    enum Direction { Up, Down, Left, Right };
     void startShooting();
     void setEnemyPixmap(const QPixmap &pixmap);
     void move();
@@ -30,6 +34,7 @@ private:
     double speed;
     int health;
     Direction direction;
+    QTimer *moveTimer;
     QTimer* shootTimer;
     void RandomDirection(); // If you need random direction logic
     void checkBounds();
