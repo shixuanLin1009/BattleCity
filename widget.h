@@ -4,6 +4,8 @@
 #include <QWidget>
 #include<Scene.h>
 #include<GameOn.h>
+#include<Tank.h>
+#include<QGraphicsScene>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,12 +19,14 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
     GameOn *gameon;
+    Scene *scene;
 private slots:
-    void on_startGameButton_clicked();
+    void on_player1_clicked();
+    void on_player2_clicked();
 
 private:
+
     Ui::Widget *ui;
-    Scene *scene;
 
 };
 #endif // WIDGET_H

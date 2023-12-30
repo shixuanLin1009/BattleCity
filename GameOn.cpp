@@ -4,11 +4,11 @@
 #include "widget.h"
 #include <QGraphicsSceneMouseEvent>
 
-GameOn::GameOn(QWidget *parent) :
+GameOn::GameOn(int option, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::GameOn), scene(new Scene)
+    ui(new Ui::GameOn), scene(new Scene(option))
 {
-
+    qDebug() << option;
     ui->setupUi(this);
     ui->graphicsView->setScene(scene);//利用ut抓View的地址
     ui->graphicsView ->setFixedSize(800,600);
@@ -33,3 +33,4 @@ void GameOn::keyPressEvent(QKeyEvent *event)
     }
     QGraphicsScene::keyPressEvent(event);
 }
+
