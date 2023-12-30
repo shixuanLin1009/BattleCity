@@ -5,6 +5,7 @@
 #include <QWidget>
 #include<QGraphicsPixmapItem>
 
+
 class Tank:public QGraphicsPixmapItem
 {
 public:

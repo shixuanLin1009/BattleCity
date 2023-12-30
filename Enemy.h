@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QObject>
 #include<QWidget>
+#include<Bullet.h>
 
 class Enemy : public QObject,public QGraphicsPixmapItem
 {
@@ -16,7 +17,6 @@ public:
     ~Enemy();
 
     enum Direction { Up, Down, Left, Right };
-    void startShooting();
     void setEnemyPixmap(const QPixmap &pixmap);
     void move();
     int getType() const;
@@ -26,16 +26,17 @@ public:
     void setDirection(Direction newDirection);
     Direction getDirection() const;
 
-    //public slots:
-    //    void shoot();
+public slots:
+    void shoot();
 
 private:
     int enemyType;
     double speed;
     int health;
     Direction direction;
+    int Dir;
     QTimer *moveTimer;
-    QTimer* shootTimer;
+    QTimer *shootTimer;
     void RandomDirection(); // If you need random direction logic
     void checkBounds();
 };

@@ -6,6 +6,7 @@
 #include <QTimer>
 #include<QList>
 #include"Obstacle.h"
+#include<Scene.h>
 
 
 Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
@@ -16,6 +17,11 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
     moveTimer= new QTimer();
     connect(moveTimer,&QTimer::timeout,this,&Enemy::move);
     moveTimer->start(1000);
+
+    shootTimer = new QTimer();
+    connect(shootTimer,&QTimer::timeout,this,&Enemy::shoot);
+    shootTimer->start(500);
+
     int unit =40;
     //四種敵人之參數
     switch (enemyType) {
@@ -54,6 +60,13 @@ Enemy::~Enemy()
     delete parent();
 }
 
+void Enemy::shoot()
+{
+    Bullet *bullet=new EnemyBullet(nullptr,nullptr,Dir);
+    bullet->setPos(this->pos());
+    scene()->addItem(bullet);
+}
+
 void Enemy::move() {
     // Logic for enemy movement
     QPointF pos = this->pos();
@@ -79,8 +92,9 @@ void Enemy::move() {
 }
 
 void Enemy::RandomDirection() {
-    int randomDirection = QRandomGenerator::global()->bounded(0, 4);
+    int randomDirection = QRandomGenerator::global()->bounded(0, 3);
     direction = static_cast<Direction>(randomDirection);
+    Dir=randomDirection;
 }
 
 

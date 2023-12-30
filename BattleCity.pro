@@ -42,3 +42,4 @@ RESOURCES += \
     Enemy/Enemy.qrc \
     Obstacles/Obstacles.qrc \
     image.qrc
+-v
