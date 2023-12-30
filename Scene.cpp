@@ -101,10 +101,7 @@ for (auto *enemy : enemies) {
 }
 void Scene::showMap()
 {
-    int j=0;
-    int k=0;
-    int l=0;
-    int m=0;
+
     for(int i=0;i<=760;i+=40){
 
         Obstacle *j = new Obstacle();
