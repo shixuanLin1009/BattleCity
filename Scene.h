@@ -34,7 +34,7 @@ private:
     QGraphicsTextItem *gameOverItem;
     QTimer *moveTimer;
     QList<Enemy*> enemies;
-
+    int option;
     int scoreArray[1000];
     int score;
     int bestScore;
