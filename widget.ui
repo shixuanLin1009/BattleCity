@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QPushButton" name="startGameButton">
+  <widget class="QPushButton" name="player1">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -26,7 +26,7 @@
     <string>1 PLAYER</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="startGameButton_2">
+  <widget class="QPushButton" name="player2">
    <property name="geometry">
     <rect>
      <x>290</x>
