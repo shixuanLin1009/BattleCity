@@ -8,6 +8,8 @@ GameOn::GameOn(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GameOn), scene(new Scene)
 {
+    // Set background color of the scene
+    scene->setBackgroundBrush(QBrush(QColor("#D9D9D9")));
 
     ui->setupUi(this);
     ui->graphicsView->setScene(scene);//利用ut抓View的地址
