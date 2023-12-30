@@ -12,8 +12,9 @@ class Scene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit Scene(QGraphicsScene *parent = nullptr);
+    explicit Scene(int option, QGraphicsScene *parent = nullptr);
     Tank *tank;
+    Tank *tank2;
     void startGame();
     void incrementScore();
     void spawnEnemies();

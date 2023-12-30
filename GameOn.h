@@ -11,7 +11,7 @@ class GameOn : public QWidget, QGraphicsScene
 {
 
 public:
-    explicit GameOn(QWidget *parent = nullptr);
+    explicit GameOn(int option, QWidget *parent = nullptr);
     ~GameOn();
 
 private slots:

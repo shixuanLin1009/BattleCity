@@ -3,7 +3,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 
-Scene::Scene(QGraphicsScene *parent)
+Scene::Scene(int option, QGraphicsScene *parent)
     : QGraphicsScene{parent},tank(new Tank)
 {
 
@@ -17,6 +17,11 @@ Scene::Scene(QGraphicsScene *parent)
     moveTimer->start(200); // Update every 200 milliseconds
 
     tank->setPos(0,220);
+    if(option==1){
+        tank2 = new Tank();
+        addItem(tank2);
+        tank2->setPos(-40,220);
+    }
     showMap();
 }
 void Scene::startGame()
