@@ -323,6 +323,7 @@ if(!pause){
     if(event->key()==Qt::Key_Space){
         Bullet *bullet = new Bullet(nullptr,nullptr,dir);
         connect(bullet,&Bullet::bulletHitsEnemv,this,&Scene::incrementScore);
+        connect(bullet,&Bullet::bulletHitsBase,this,&Scene::gameOverGraphics);
         bullet->setPos(pos);
         addItem(bullet);
     }
@@ -356,6 +357,7 @@ if(!pause){
         if(event->key()==Qt::Key_F){
             Bullet *bullet2 = new Bullet(nullptr,nullptr,dir2);
             connect(bullet2,&Bullet::bulletHitsEnemv,this,&Scene::incrementScore);
+            connect(bullet2,&Bullet::bulletHitsBase,this,&Scene::gameOverGraphics);
             bullet2->setPos(pos2);
             addItem(bullet2);
         }
