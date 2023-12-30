@@ -20,7 +20,6 @@ public:
     void incrementScore();
     void spawnEnemies();
     void updateEnemies();
-    void gameOverGSraphics();
     void tankDestroyed();
 signals:
     void gamePause();
@@ -32,7 +31,7 @@ private:
     void showMap();
     void showPauseGraphics();
     void hidePauseGraphics();
-    void gameOverGSraphics();
+    void gameOverGraphics();
     void showBase();
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;

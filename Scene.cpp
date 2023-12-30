@@ -13,9 +13,6 @@ Scene::Scene(int opt, QGraphicsScene *parent)
     bestScore=0;
     tank_destroyed=0;
     addItem(tank);
-    spawnTimer = new QTimer();
-    connect(spawnTimer,&QTimer::timeout,this,&Scene::spawnEnemies);
-    spawnTimer->start(4000);
     spawnEnemies();
     moveTimer = new QTimer();
     connect(moveTimer, &QTimer::timeout, this, &Scene::updateEnemies);
@@ -68,7 +65,7 @@ void Scene::hidePauseGraphics()
 
 }
 
-void Scene::gameOverGSraphics()
+void Scene::gameOverGraphics()
 {
 //while(1){
 //    int i=0;
@@ -150,8 +147,8 @@ connect(this, &Scene::gamePause,enemy2, &Enemy::pause);
 connect(this, &Scene::gamePlay,enemy2, &Enemy::play);
 //enemies.append(enemy2);
 if(option==0){
-    connect(enemy1, &Enemy::tankDestroyed, this, &Scene::gameOverGSraphics);
-    connect(enemy2, &Enemy::tankDestroyed, this, &Scene::gameOverGSraphics);
+    connect(enemy1, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
+    connect(enemy2, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
 }
 if(option==1){
     connect(enemy1, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
@@ -291,6 +288,7 @@ if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
     hidePauseGraphics();
     emit gamePlay();
     pause=false;
+
 }
 
 QGraphicsScene::keyPressEvent(event);
@@ -368,7 +366,8 @@ QGraphicsScene::keyPressEvent(event);
 
 void Scene::incrementScore()
 {
-score++;
+score+=100;
+spawnEnemies();
 if (score > bestScore) {
     bestScore = score;
     }
@@ -379,6 +378,6 @@ void Scene::tankDestroyed()
     tank_destroyed++;
     qDebug() << tank_destroyed;
     if(tank_destroyed==2){
-        gameOverGSraphics();
+        gameOverGraphics();
     }
 }

@@ -9,9 +9,6 @@ Tank::Tank(QGraphicsPixmapItem *parent)
     tankDirection=0;
 }
 
-Tank::~Tank(){
-    delete this;
-}
 void Tank::setDirection(int Direction)
 {
     tankDirection = Direction;
