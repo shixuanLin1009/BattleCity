@@ -18,7 +18,8 @@ public:
     ~Widget();
     GameOn *gameon;
 private slots:
-    void on_startGameButton_clicked();
+    void on_player1_clicked();
+    void on_player2_clicked();
 
 private:
     Ui::Widget *ui;

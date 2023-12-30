@@ -3,7 +3,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 
-Scene::Scene(QGraphicsScene *parent)
+Scene::Scene(int opt, QGraphicsScene *parent)
     : QGraphicsScene{parent},tank(new Tank)
 {
 
@@ -17,6 +17,12 @@ Scene::Scene(QGraphicsScene *parent)
     moveTimer->start(200); // Update every 200 milliseconds
 
     tank->setPos(0,220);
+    if(opt==1){
+        option=opt;
+        tank2 = new Tank();
+        addItem(tank2);
+        tank2->setPos(-40,220);
+    }
     showMap();
 }
 void Scene::startGame()
@@ -101,10 +107,7 @@ for (auto *enemy : enemies) {
 }
 void Scene::showMap()
 {
-    int j=0;
-    int k=0;
-    int l=0;
-    int m=0;
+
     for(int i=0;i<=760;i+=40){
 
         Obstacle *j = new Obstacle();
@@ -222,26 +225,27 @@ QGraphicsScene::keyPressEvent(event);
 
 //tank move
 QPointF pos=tank->pos();
+int step=20;
 if(event->key()==Qt::Key_Left&&pos.x()>-400){
-    tank->moveBy(-10,0);
+    tank->moveBy(-step,0);
     tank->setDirection(3);
     tank->setPixmap(QPixmap(":/img/Player1_Left.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Right&&pos.x()<320){
-    tank->moveBy(10,0);
+    tank->moveBy(step,0);
     tank->setDirection(1);
     tank->setPixmap(QPixmap(":/img/Player1_Right.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Up&&pos.y()>-300){
-    tank->moveBy(0,-10);
+    tank->moveBy(0,-step);
     tank->setDirection(0);
     tank->setPixmap(QPixmap(":/img/Player1_Up.png").scaled(40,40));
     tank->checkColliging(pos);
 }
 if(event->key()==Qt::Key_Down&&pos.y()<220){
-    tank->moveBy(0,10);
+    tank->moveBy(0,step);
     tank->setDirection(2);
     tank->setPixmap(QPixmap(":/img/Player1_Down.png").scaled(40,40));
     tank->checkColliging(pos);
@@ -252,6 +256,42 @@ if(event->key()==Qt::Key_Space){
     bullet->setPos(pos);
     addItem(bullet);
 }
+if(option==1){
+    int dir2=tank2->getDirection();
+    QPointF pos2=tank2->pos();
+    if(event->key()==Qt::Key_A&&pos2.x()>-400){
+        tank2->moveBy(-10,0);
+        tank2->setDirection(3);
+        tank2->setPixmap(QPixmap(":/img/Player1_Left.png").scaled(40,40));
+        tank2->checkColliging(pos2);
+    }
+    if(event->key()==Qt::Key_D&&pos2.x()<320){
+        tank2->moveBy(10,0);
+        tank2->setDirection(1);
+        tank2->setPixmap(QPixmap(":/img/Player1_Right.png").scaled(40,40));
+        tank2->checkColliging(pos2);
+    }
+    if(event->key()==Qt::Key_W&&pos2.y()>-300){
+        tank2->moveBy(0,-10);
+        tank2->setDirection(0);
+        tank2->setPixmap(QPixmap(":/img/Player1_Up.png").scaled(40,40));
+        tank2->checkColliging(pos2);
+    }
+    if(event->key()==Qt::Key_S&&pos2.y()<220){
+        tank2->moveBy(0,10);
+        tank2->setDirection(2);
+        tank2->setPixmap(QPixmap(":/img/Player1_Down.png").scaled(40,40));
+        tank2->checkColliging(pos2);
+    }
+    if(event->key()==Qt::Key_F){
+        Bullet *bullet2 = new Bullet(nullptr,nullptr,dir2);
+        connect(bullet2,&Bullet::bulletHitsEnemv,this,&Scene::incrementScore);
+        bullet2->setPos(pos2);
+        addItem(bullet2);
+    }
+
+}
+QGraphicsScene::keyPressEvent(event);
 }
 
 void Scene::incrementScore()

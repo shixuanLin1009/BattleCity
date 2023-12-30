@@ -4,9 +4,9 @@
 #include "widget.h"
 #include <QGraphicsSceneMouseEvent>
 
-GameOn::GameOn(QWidget *parent) :
+GameOn::GameOn(int option, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::GameOn), scene(new Scene)
+    ui(new Ui::GameOn), scene(new Scene(option))
 {
     // Set background color of the scene
     scene->setBackgroundBrush(QBrush(QColor("#D9D9D9")));
