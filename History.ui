@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GameOn</class>
- <widget class="QWidget" name="GameOn">
+ <class>History</class>
+ <widget class="QWidget" name="History">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QGraphicsView" name="graphicsView">
+  <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>801</width>
-     <height>601</height>
+     <x>70</x>
+     <y>50</y>
+     <width>256</width>
+     <height>192</height>
     </rect>
    </property>
   </widget>

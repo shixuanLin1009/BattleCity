@@ -1,13 +1,13 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "Obstacle.h"
 #include<QGraphicsScene>
 #include<Tank.h>
 #include<Enemy.h>
 #include <QTimer>
 #include<Bullet.h>
 #include<Base.h>
+#include <QWidget>
 
 class Scene : public QGraphicsScene
 {
@@ -32,7 +32,9 @@ private:
     void showPauseGraphics();
     void hidePauseGraphics();
     void gameOverGraphics();
+    void updateStats(const QString &filePath);
     void showBase();
+    void saveScoresToFile(const QString &filePath);
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;
@@ -41,6 +43,7 @@ private:
     QList<Enemy*> enemies;
     Base *base;
     int option;
+    int totalEnemy=0;
     int scoreArray[1000];
     int score;
     int bestScore;
