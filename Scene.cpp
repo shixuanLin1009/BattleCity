@@ -178,7 +178,6 @@ void Scene::spawnEnemies() {
     int ran_2= QRandomGenerator::global()->bounded(0, 5);
 
     totalEnemy++;
-
     Enemy *enemy1 = new Enemy(ran);
     enemy1->setPos(-240, -260);
     addItem(enemy1);
@@ -188,19 +187,20 @@ void Scene::spawnEnemies() {
     enemy2->setPos(240, -220);
     addItem(enemy2);
 
+    connect(this, &Scene::gamePause,enemy1, &Enemy::pause);
+    connect(this, &Scene::gamePlay,enemy1, &Enemy::play);
+    connect(this, &Scene::gamePause,enemy2, &Enemy::pause);
+    connect(this, &Scene::gamePlay,enemy2, &Enemy::play);
+    //
+    if(option==0){
+        connect(enemy1, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
+        connect(enemy2, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
+    }
+    if(option==1){
+        connect(enemy1, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
+        connect(enemy2, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
+    }
 
-connect(this, &Scene::gamePause,enemy1, &Enemy::pause);
-connect(this, &Scene::gamePlay,enemy1, &Enemy::play);
-connect(this, &Scene::gamePause,enemy2, &Enemy::pause);
-connect(this, &Scene::gamePlay,enemy2, &Enemy::play);
-//
-if(option==0){
-    connect(enemy1, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
-    connect(enemy2, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
-}
-if(option==1){
-    connect(enemy1, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
-    connect(enemy2, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
 }
 
 void Scene::updateEnemies() {
