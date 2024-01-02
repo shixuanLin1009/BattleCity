@@ -33,6 +33,7 @@ private:
     void hidePauseGraphics();
     void gameOverGraphics();
     void showBase();
+    void showIce();
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;

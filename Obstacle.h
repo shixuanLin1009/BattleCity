@@ -20,6 +20,12 @@ public:
     Steel();
 };
 
+class Ice:public Obstacle
+{
+public:
+    Ice();
+};
+
 
 
 #endif // OBSTACLE_H

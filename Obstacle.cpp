@@ -18,3 +18,8 @@ Steel::Steel()
 {
     setPixmap(QPixmap(":/Obstacles/Steel.png").scaled(40,40));
 }
+
+Ice::Ice()
+{
+    setPixmap(QPixmap(":/Obstacles/Ice.png").scaled(40,40));
+}
