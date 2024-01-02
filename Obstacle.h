@@ -4,22 +4,42 @@
 #include <QObject>
 #include <QWidget>
 #include<QGraphicsPixmapItem>
-class Obstacle:public QGraphicsPixmapItem
-{
+#include <QGraphicsScene>
+
+class Obstacle: public QGraphicsPixmapItem {
 public:
-    Obstacle(QGraphicsPixmapItem *parent=nullptr);
+    Obstacle(QGraphicsPixmapItem *parent = nullptr);
+    virtual void takeDamage(int damage); // 處理傷害公共方法
+
+protected:
+    int health;
 };
-class Tree:public Obstacle
-{
+
+// Water
+class Water: public Obstacle {
+public:
+    Water();
+};
+
+// Tree
+class Tree: public Obstacle {
 public:
     Tree();
 };
-class Steel:public Obstacle
-{
+
+// Stone
+class Stone : public Obstacle {
 public:
-    Steel();
+    Stone(QGraphicsPixmapItem *parent = nullptr);
+    //void takeDamage(int damage) override;
 };
 
+// Steel
+class Steel : public Obstacle {
+public:
+    Steel(QGraphicsPixmapItem *parent = nullptr);
+    //void takeDamage(int damage) override;
+};
 
 
 #endif // OBSTACLE_H

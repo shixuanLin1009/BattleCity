@@ -131,8 +131,8 @@ void Scene::showBase()
 
 
 void Scene::spawnEnemies() {
-    int ran= QRandomGenerator::global()->bounded(0, 4);
-    int ran_2= QRandomGenerator::global()->bounded(0, 4);
+    int ran= QRandomGenerator::global()->bounded(0, 5);
+    int ran_2= QRandomGenerator::global()->bounded(0, 5);
     Enemy *enemy1 = new Enemy(ran);
     enemy1->setPos(-240, -260);
     addItem(enemy1);
@@ -145,7 +145,7 @@ connect(this, &Scene::gamePause,enemy1, &Enemy::pause);
 connect(this, &Scene::gamePlay,enemy1, &Enemy::play);
 connect(this, &Scene::gamePause,enemy2, &Enemy::pause);
 connect(this, &Scene::gamePlay,enemy2, &Enemy::play);
-//enemies.append(enemy2);
+//
 if(option==0){
     connect(enemy1, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
     connect(enemy2, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
@@ -165,6 +165,7 @@ for (auto *enemy : enemies) {
 void Scene::showMap()
 {
     showBase();
+    // Trees
     for(int i=0;i<=240;i+=40){
 
         Tree *a = new Tree();
@@ -173,12 +174,14 @@ void Scene::showMap()
         a++;
 
     }
-    for(int i=0;i<=760;i+=40){
 
+    for(int i=0;i<=760;i+=40){
+        //底部邊界
         Obstacle *j = new Obstacle();
         j->setPos(-400+i,260);
         addItem(j);
         j++;
+        //頂部邊界
         Obstacle *k = new Obstacle();
         k->setPos(-400+i,-300);
         addItem(k);
@@ -187,11 +190,12 @@ void Scene::showMap()
     }
 
     for(int i=0;i<=560;i+=40){
-
+        //左側邊界
         Obstacle *j = new Obstacle();
         j->setPos(-400,-300+i);
         addItem(j);
         j++;
+        //右側邊界
         Obstacle *k = new Obstacle();
         k->setPos(360,-300+i);
         addItem(k);
@@ -199,41 +203,43 @@ void Scene::showMap()
 
     }
 
+    // 內部障礙物
     for(int i=0;i<=680;i+=120){
 
-        Obstacle *j = new Obstacle();
+        Water *j = new Water();
         j->setPos(-320+i,-220);
         addItem(j);
         j++;
-        Obstacle *k = new Obstacle();
+        Stone *k = new Stone();
         k->setPos(-320+i,-180);
         addItem(k);
         k++;
-        Obstacle *l = new Obstacle();
+        Stone *l = new Stone();
         l->setPos(-320+i,-140);
         addItem(l);
         l++;
-        Obstacle *m = new Obstacle();
+        Stone *m = new Stone();
         m->setPos(-320+i,-100);
         addItem(m);
         m++;
     }
 
+    // 內部障礙物
     for(int i=0;i<=120;i+=120){
 
-        Obstacle *j = new Obstacle();
+        Stone *j = new Stone();
         j->setPos(-320+i,60);
         addItem(j);
         j++;
-        Obstacle *k = new Obstacle();
+        Stone *k = new Stone();
         k->setPos(-320+i,100);
         addItem(k);
         k++;
-        Obstacle *l = new Obstacle();
+        Stone *l = new Stone();
         l->setPos(-320+i,140);
         addItem(l);
         l++;
-        Obstacle *m = new Obstacle();
+        Stone *m = new Stone();
         m->setPos(-320+i,180);
         addItem(m);
         m++;
@@ -241,19 +247,19 @@ void Scene::showMap()
 
     for(int i=0;i<=120;i+=120){
 
-        Obstacle *j = new Obstacle();
+        Stone *j = new Stone();
         j->setPos(160+i,60);
         addItem(j);
         j++;
-        Obstacle *k = new Obstacle();
+        Stone *k = new Stone();
         k->setPos(160+i,100);
         addItem(k);
         k++;
-        Obstacle *l = new Obstacle();
+        Stone *l = new Stone();
         l->setPos(160+i,140);
         addItem(l);
         l++;
-        Obstacle *m = new Obstacle();
+        Stone *m = new Stone();
         m->setPos(160+i,180);
         addItem(m);
         m++;
@@ -379,7 +385,9 @@ void Scene::tankDestroyed()
 {
     tank_destroyed++;
     qDebug() << tank_destroyed;
-    if(tank_destroyed==2){
-        gameOverGraphics();
+    if (tank_destroyed == 2) {
+    tank->takeDamage(1);
+    tank2->takeDamage(1);
+    gameOverGraphics();
     }
 }

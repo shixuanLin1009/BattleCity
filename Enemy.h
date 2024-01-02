@@ -26,6 +26,11 @@ public:
 
     void setDirection(Direction newDirection);
     Direction getDirection() const;
+    void takeDamage(int damage); // 處理所受傷害
+protected:
+    int health; // 生命值
+    int enemyType;
+    double speed;
 
 public slots:
     void shoot();
@@ -33,9 +38,6 @@ signals:
     void tankDestroyed();
 
 private:
-    int enemyType;
-    double speed;
-    int health;
     Direction direction;
     int Dir;
     QTimer *moveTimer;

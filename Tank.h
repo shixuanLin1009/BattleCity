@@ -13,6 +13,9 @@ public:
     void setDirection(int Direction);
     int getDirection();
     void checkColliging(QPointF pos);
+    void takeDamage(int damage); // 處理所受傷害
+protected:
+    int health; // 生命值
 signals:
     void tankHitsObstacle();
     void destroyed();

@@ -22,7 +22,7 @@ signals:
 private:
     QTimer *timer;
     int BulletDirection;//up=0,right=1 down=2 left=4
-    virtual void check_colliding_itmes();
+    virtual void check_colliding_items();
 };
 class EnemyBullet:public Bullet
 {
@@ -32,7 +32,7 @@ public:
     ~EnemyBullet();
 public slots:
     void shot();
-    void check_colliding_itmes();
+    void check_colliding_items();
 private:
     int Direction;
     QTimer *e_timer;

@@ -40,7 +40,7 @@ void Bullet::shot()
             moveBy(-10,0);//left
             setPixmap(QPixmap(":/img/Bullet_Left.png").scaled(40,40));
     }
-    check_colliding_itmes();
+    check_colliding_items();
     /*if(x()<-400||x()>400||y()>300||y()<-300){
             scene()->removeItem(this);
             delete this;
@@ -48,42 +48,55 @@ void Bullet::shot()
     }*/
 }
 
-void Bullet::check_colliding_itmes()
+void Bullet::check_colliding_items()
 {
-    QList <QGraphicsItem *>  colliding_itmes = collidingItems();
+    QList<QGraphicsItem *> colliding_items = collidingItems();
 
-    for(int i = 0,n =colliding_itmes.size();i<n;i++){
-
-            if (typeid (*colliding_itmes[i]) == typeid(Obstacle)){
+    for (int i = 0; i < colliding_items.size(); i++) {
+            if (typeid(*colliding_items[i]) == typeid(Obstacle)) {
+                Obstacle *obstacle = dynamic_cast<Obstacle *>(colliding_items[i]);
+                if (obstacle)
+                    obstacle->takeDamage(1); // 减少生命值
                 scene()->removeItem(this);
                 delete this;
-                qDebug() <<"Bullet deleted";
+                qDebug() << "Bullet deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Steel)){
-                scene()->removeItem(colliding_itmes[i]);
+            if (typeid(*colliding_items[i]) == typeid(Steel)) {
+                Steel *steel = dynamic_cast<Steel *>(colliding_items[i]);
+                if (steel)
+                    steel->takeDamage(1); // 减少生命值
                 scene()->removeItem(this);
-                delete colliding_itmes[i];
                 delete this;
-                qDebug() <<"Bullet deleted";
+                qDebug() << "Bullet deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Enemy)){
+            if (typeid(*colliding_items[i]) == typeid(Stone)) {
+                Stone *stone = dynamic_cast<Stone *>(colliding_items[i]);
+                if (stone)
+                    stone->takeDamage(1); // 减少生命值
+                scene()->removeItem(this);
+                delete this;
+                qDebug() << "Bullet deleted";
+                return;
+            }
+            if (typeid(*colliding_items[i]) == typeid(Enemy)) {
+                Enemy *enemy = dynamic_cast<Enemy *>(colliding_items[i]);
+                if (enemy)
+                    enemy->takeDamage(1); // 减少生命值
                 emit bulletHitsEnemv();
-
-                scene()->removeItem(colliding_itmes[i]);
                 scene()->removeItem(this);
-                delete colliding_itmes[i];
                 delete this;
-                qDebug() <<"Bullet deleted";
-                qDebug() <<"Enemy deleted";
+                qDebug() << "Bullet deleted";
+                qDebug() << "Enemy deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Base)){
+            // Base一擊必殺
+            if (typeid (*colliding_items[i]) == typeid(Base)){
                 emit bulletHitsBase();
-                scene()->removeItem(colliding_itmes[i]);
+                scene()->removeItem(colliding_items[i]);
                 scene()->removeItem(this);
-                //delete colliding_itmes[i];
+                //delete colliding_items[i];
                 delete this;
                 qDebug() <<"Bullet deleted";
                 qDebug() <<"Tank deleted";
@@ -126,45 +139,60 @@ void EnemyBullet::shot()
             moveBy(-10,0);//left
             setPixmap(QPixmap(":/img/Bullet_Left.png").scaled(40,40));
     }
-    check_colliding_itmes();
+    check_colliding_items();
 
 }
 
-void EnemyBullet::check_colliding_itmes()
+
+void EnemyBullet::check_colliding_items()
 {
-    QList <QGraphicsItem *>  colliding_itmes = collidingItems();
+    QList<QGraphicsItem *> colliding_items = collidingItems();
 
-    for(int i = 0,n =colliding_itmes.size();i<n;i++){
-
-            if (typeid (*colliding_itmes[i]) == typeid(Obstacle)){
+    for (int i = 0; i < colliding_items.size(); i++) {
+            if (typeid(*colliding_items[i]) == typeid(Obstacle)) {
+                Obstacle *obstacle = dynamic_cast<Obstacle *>(colliding_items[i]);
+                if (obstacle)
+                    obstacle->takeDamage(1); // 减少生命值
                 scene()->removeItem(this);
                 delete this;
-                qDebug() <<"Bullet deleted";
+                qDebug() << "EnemyBullet deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Steel)){
-                scene()->removeItem(colliding_itmes[i]);
+            if (typeid(*colliding_items[i]) == typeid(Steel)) {
+                Steel *steel = dynamic_cast<Steel *>(colliding_items[i]);
+                if (steel)
+                    steel->takeDamage(1); // 减少生命值
                 scene()->removeItem(this);
-                delete colliding_itmes[i];
                 delete this;
-                qDebug() <<"Bullet deleted";
+                qDebug() << "EnemyBullet deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Tank)){
+            if (typeid(*colliding_items[i]) == typeid(Stone)) {
+                Stone *stone = dynamic_cast<Stone *>(colliding_items[i]);
+                if (stone)
+                    stone->takeDamage(1); // 减少生命值
+                scene()->removeItem(this);
+                delete this;
+                qDebug() << "EnemyBullet deleted";
+                return;
+            }
+            if (typeid(*colliding_items[i]) == typeid(Tank)) {
                 emit bulletHitsTank();
-                scene()->removeItem(colliding_itmes[i]);
+                Tank *tank = dynamic_cast<Tank *>(colliding_items[i]);
+                if (tank)
+                    tank->takeDamage(1); // 减少生命值
                 scene()->removeItem(this);
-                //delete colliding_itmes[i];
                 delete this;
-                qDebug() <<"Bullet deleted";
-                qDebug() <<"Tank deleted";
+                qDebug() << "EnemyBullet deleted";
+                qDebug() << "Tank deleted";
                 return;
             }
-            if (typeid (*colliding_itmes[i]) == typeid(Base)){
+            // Base一擊必殺
+            if (typeid (*colliding_items[i]) == typeid(Base)){
                 emit bulletHitsBase();
-                scene()->removeItem(colliding_itmes[i]);
+                scene()->removeItem(colliding_items[i]);
                 scene()->removeItem(this);
-                //delete colliding_itmes[i];
+                //delete colliding_items[i];
                 delete this;
                 qDebug() <<"Bullet deleted";
                 qDebug() <<"Tank deleted";
@@ -172,3 +200,4 @@ void EnemyBullet::check_colliding_itmes()
             }
     }
 }
+
