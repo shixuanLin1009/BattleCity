@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/text">
+        <file>History.txt</file>
+        <file>Restart.txt</file>
+    </qresource>
+</RCC>

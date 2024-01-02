@@ -1,19 +1,43 @@
 #include "Scene.h"
 #include "Enemy.h"
+#include "Obstacle.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
+#include <QFile>
 #include<QRandomGenerator>
 
 Scene::Scene(int opt, QGraphicsScene *parent)
     : QGraphicsScene{parent},tank(new Tank)
 {
-    pause=false;
-    option=opt;
-    score=0;
-    bestScore=0;
     tank_destroyed=0;
+    option=opt;
+    pause=false;
+    if(opt==2){
+        QFile file(":/text/Restart.txt");
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        QTextStream in(&file);
+        QString line1 = in.readLine();
+        QString line2 = in.readLine();
+        QString line3 = in.readLine();
+
+        // Close the file
+        file.close();
+        totalEnemy = line1.toInt();
+        score=line2.toInt();
+        bestScore=line3.toInt();
+        int spawn=totalEnemy/2;
+        for(int i=0; i<spawn;i++){
+            spawnEnemies();
+        }
+    }
+
+    if(opt==0||opt==1){
+        score=0;
+        bestScore=0;
+        totalEnemy=1;
+        spawnEnemies();
+    }
     addItem(tank);
-    spawnEnemies();
     moveTimer = new QTimer();
     connect(moveTimer, &QTimer::timeout, this, &Scene::updateEnemies);
 
@@ -30,10 +54,6 @@ Scene::Scene(int opt, QGraphicsScene *parent)
     showMap();
 
 }
-void Scene::startGame()
-{
-}
-
 
 void Scene::showPauseGraphics()
 {
@@ -53,6 +73,7 @@ addItem(scoreTextItem);
 scoreTextItem->setPos(QPoint(0,0) -
                       QPoint(scoreTextItem->boundingRect().width()/2,
                              scoreTextItem->boundingRect().height()/2));
+
 }
 
 void Scene::hidePauseGraphics()
@@ -66,16 +87,13 @@ void Scene::hidePauseGraphics()
 }
 
 void Scene::gameOverGraphics()
-{
-//while(1){
-//    int i=0;
-//    if(scoreArray[i]>0){scoreArray[i]=score;break;}
-//    i++;
-//}
+{    
+
+
 gameOverItem = new QGraphicsTextItem();
 QString htmlString =   "<p> Game Over <br>"
                      "<p> Score : " + QString::number(score) + " <br>"
-                     + " Best Score : " + QString::number(bestScore) + " </p>"
+                     + " Best Score Today: " + QString::number(bestScore) + " </p>"
                      + "<p> Press R to return to main menu <br>";
 QFont font("Consolas", 30, QFont::Bold);
 
@@ -88,6 +106,8 @@ gameOverItem->setPos(QPoint(0,0) -
                       QPoint(gameOverItem->boundingRect().width()/2,
                              gameOverItem->boundingRect().height()/2));
 
+saveScoresToFile("C:/Users/ASUS/Documents/GitHub/BattleCity/History.txt");
+updateStats("C:/Users/ASUS/Documents/GitHub/BattleCity/Restart.txt");
 }
 
 void Scene::showBase()
@@ -153,15 +173,21 @@ void Scene::showWater()
 
 
 void Scene::spawnEnemies() {
+
     int ran= QRandomGenerator::global()->bounded(0, 5);
     int ran_2= QRandomGenerator::global()->bounded(0, 5);
+
+    totalEnemy++;
+
     Enemy *enemy1 = new Enemy(ran);
     enemy1->setPos(-240, -260);
     addItem(enemy1);
-
+    connect(this, &Scene::gamePause,enemy1, &Enemy::pause);
+    connect(this, &Scene::gamePlay,enemy1, &Enemy::play);
     Enemy *enemy2 = new Enemy(ran_2);
     enemy2->setPos(240, -220);
     addItem(enemy2);
+
 
 connect(this, &Scene::gamePause,enemy1, &Enemy::pause);
 connect(this, &Scene::gamePlay,enemy1, &Enemy::play);
@@ -175,8 +201,6 @@ if(option==0){
 if(option==1){
     connect(enemy1, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
     connect(enemy2, &Enemy::tankDestroyed, this, &Scene::tankDestroyed);
-}
-
 }
 
 void Scene::updateEnemies() {
@@ -417,4 +441,53 @@ void Scene::tankDestroyed()
     tank2->takeDamage(1);
     gameOverGraphics();
     }
+}
+
+void Scene::saveScoresToFile(const QString &filePath)
+{
+    // Open the file for appending
+    QFile file(filePath);
+    if (!file.open(QIODevice::Append | QIODevice::Text))
+    {
+        qDebug() << "Could not open file for appending: " << file.errorString();
+        return;
+    }
+
+    // Write scores to the file
+    QTextStream out(&file);
+    out << score << "\n";
+
+    // Check for errors during writing
+    if (out.status() != QTextStream::Ok)
+    {
+        qDebug() << "Error writing to file: " << file.errorString();
+    }
+
+    // Close the file
+    file.close();
+}
+void Scene::updateStats(const QString &filePath)
+{
+    // Open the file for writing (rewriting)
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "Could not open file for writing: " << file.errorString();
+        return;
+    }
+
+    // Write scores to the file
+    QTextStream out(&file);
+    out << totalEnemy << "\n";
+    out << score << "\n";
+    out << bestScore << "\n";
+
+    // Check for errors during writing
+    if (out.status() != QTextStream::Ok)
+    {
+        qDebug() << "Error writing to file: " << file.errorString();
+    }
+
+    // Close the file
+    file.close();
 }
