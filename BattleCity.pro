@@ -1,7 +1,6 @@
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -14,6 +13,7 @@ SOURCES += \
     BulletAbility.cpp \
     Enemy.cpp \
     GameOn.cpp \
+    History.cpp \
     Obstacle.cpp \
     Scene.cpp \
     Tank.cpp \
@@ -26,6 +26,7 @@ HEADERS += \
     BulletAbility.h \
     Enemy.h \
     GameOn.h \
+    History.h \
     Obstacle.h \
     Scene.h \
     Tank.h \
@@ -33,6 +34,7 @@ HEADERS += \
 
 FORMS += \
     GameOn.ui \
+    History.ui \
     widget.ui
 
 # Default rules for deployment.
@@ -42,6 +44,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     Enemy/Enemy.qrc \
+    History.qrc \
     Obstacles/Obstacles.qrc \
     image.qrc
 -v
+
+DISTFILES += \
+    History \
+    History.txt

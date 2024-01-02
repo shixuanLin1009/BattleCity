@@ -39,7 +39,7 @@
     <string>2 PLAYERS</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="startGameButton_3">
+  <widget class="QPushButton" name="quit">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -52,7 +52,7 @@
     <string>QUIT GAME</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="startGameButton_4">
+  <widget class="QPushButton" name="restart">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -62,7 +62,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>CONTINUE</string>
+    <string>RESTART LAST GAME</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="history">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>60</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>History</string>
    </property>
   </widget>
  </widget>
