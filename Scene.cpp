@@ -149,6 +149,28 @@ void Scene::showBase()
     }
 }
 
+void Scene::showIce()
+{
+    for(int i=0;i<=7;i++)
+    {
+        Ice *j =new Ice();
+        j->setPos(-160+40*i,140);
+        addItem(j);
+        j++;
+    }
+}
+
+void Scene::showWater()
+{
+    for(int i=0;i<=7;i++)
+    {
+        Water *j =new Water();
+        j->setPos(-160+40*i,-60);
+        addItem(j);
+        j++;
+    }
+}
+
 
 void Scene::spawnEnemies() {
     totalEnemy++;
@@ -185,6 +207,8 @@ for (auto *enemy : enemies) {
 void Scene::showMap()
 {
     showBase();
+    showIce();
+    showWater();
     for(int i=0;i<=240;i+=40){
 
         Tree *a = new Tree();
@@ -315,7 +339,9 @@ QGraphicsScene::keyPressEvent(event);
 if(!pause){
     //tank move
     QPointF pos=tank->pos();
-    int step=20;
+
+    int step=tank->Speed();
+
     if(event->key()==Qt::Key_Left&&pos.x()>-400){
         tank->moveBy(-step,0);
         tank->setDirection(3);
@@ -343,6 +369,7 @@ if(!pause){
     if(event->key()==Qt::Key_Space){
         Bullet *bullet = new Bullet(nullptr,nullptr,dir);
         connect(bullet,&Bullet::bulletHitsEnemv,this,&Scene::incrementScore);
+        connect(bullet,&Bullet::bulletHitsBase,this,&Scene::gameOverGraphics);
         bullet->setPos(pos);
         addItem(bullet);
     }
@@ -376,6 +403,7 @@ if(!pause){
         if(event->key()==Qt::Key_F){
             Bullet *bullet2 = new Bullet(nullptr,nullptr,dir2);
             connect(bullet2,&Bullet::bulletHitsEnemv,this,&Scene::incrementScore);
+            connect(bullet2,&Bullet::bulletHitsBase,this,&Scene::gameOverGraphics);
             bullet2->setPos(pos2);
             addItem(bullet2);
         }

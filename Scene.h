@@ -35,6 +35,8 @@ private:
     void updateStats(const QString &filePath);
     void showBase();
     void saveScoresToFile(const QString &filePath);
+    void showIce();
+    void showWater();
     QGraphicsPixmapItem *gameOverPix;
     QGraphicsTextItem *scoreTextItem;
     QGraphicsTextItem *gameOverItem;

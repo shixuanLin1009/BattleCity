@@ -68,6 +68,7 @@ void Enemy::shoot()
     bullet->setPos(this->pos());
     scene()->addItem(bullet);
     connect(bullet, &EnemyBullet::bulletHitsTank, this, &Enemy::enemyWin);
+    connect(bullet,&Bullet::bulletHitsBase,this,&Enemy::enemyWin);
 }
 
 void Enemy::move() {
