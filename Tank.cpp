@@ -40,6 +40,10 @@ void Tank::checkColliging(QPointF pos)
            setSpeed(40);
            return;
        }
+       if (typeid (*colliding_itmes[i]) == typeid(Water)){
+           setSpeed(10);
+           return;
+       }
     }
 }
 

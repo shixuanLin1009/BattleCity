@@ -140,6 +140,17 @@ void Scene::showIce()
     }
 }
 
+void Scene::showWater()
+{
+    for(int i=0;i<=7;i++)
+    {
+        Water *j =new Water();
+        j->setPos(-160+40*i,-60);
+        addItem(j);
+        j++;
+    }
+}
+
 
 void Scene::spawnEnemies() {
     int ran= QRandomGenerator::global()->bounded(0, 4);
@@ -177,6 +188,7 @@ void Scene::showMap()
 {
     showBase();
     showIce();
+    showWater();
     for(int i=0;i<=240;i+=40){
 
         Tree *a = new Tree();

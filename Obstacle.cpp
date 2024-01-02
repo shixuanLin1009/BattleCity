@@ -23,3 +23,8 @@ Ice::Ice()
 {
     setPixmap(QPixmap(":/Obstacles/Ice.png").scaled(40,40));
 }
+
+Water::Water()
+{
+    setPixmap(QPixmap(":/Obstacles/Water.png").scaled(40,40));
+}
