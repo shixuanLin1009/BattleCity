@@ -16,11 +16,12 @@ public:
     int getDirection();
     void checkColliging(QPointF pos);
     void takeDamage(int damage); // 處理所受傷害
+    int getSpeed() const { return Speed(); }
     
 protected:
     int health; // 生命值
-    int Speed() const;
     void setSpeed(int newSpeed);
+    int Speed() const;
 public slots:
     void normal();
 

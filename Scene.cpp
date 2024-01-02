@@ -327,7 +327,7 @@ if(!pause){
     //tank move
     QPointF pos=tank->pos();
 
-    int step=tank->Speed();
+    int step = tank->getSpeed();
 
     if(event->key()==Qt::Key_Left&&pos.x()>-400){
         tank->moveBy(-step,0);

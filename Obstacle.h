@@ -46,11 +46,6 @@ class Ice:public Obstacle
 public:
     Ice();
 };
-class Water:public Obstacle
-{
-public:
-    Water();
-};
 
 
 #endif // OBSTACLE_H
