@@ -43,13 +43,15 @@ Steel::Steel(QGraphicsPixmapItem *parent) : Obstacle(parent) {
     setPixmap(QPixmap(":/Obstacles/Steel.png").scaled(40,40));
 }
 
+
 //void Steel::takeDamage(int damage) {
     // Steel-specific logic for taking damage
     //Obstacle::takeDamage(damage);
 //}
 
-
-
-
+Ice::Ice()
+{
+    setPixmap(QPixmap(":/Obstacles/Ice.png").scaled(40,40));
+}
 
 

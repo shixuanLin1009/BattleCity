@@ -129,6 +129,28 @@ void Scene::showBase()
     }
 }
 
+void Scene::showIce()
+{
+    for(int i=0;i<=7;i++)
+    {
+        Ice *j =new Ice();
+        j->setPos(-160+40*i,140);
+        addItem(j);
+        j++;
+    }
+}
+
+void Scene::showWater()
+{
+    for(int i=0;i<=7;i++)
+    {
+        Water *j =new Water();
+        j->setPos(-160+40*i,-60);
+        addItem(j);
+        j++;
+    }
+}
+
 
 void Scene::spawnEnemies() {
     int ran= QRandomGenerator::global()->bounded(0, 5);
@@ -166,6 +188,9 @@ void Scene::showMap()
 {
     showBase();
     // Trees
+    showIce();
+    showWater();
+
     for(int i=0;i<=240;i+=40){
 
         Tree *a = new Tree();
@@ -301,7 +326,9 @@ QGraphicsScene::keyPressEvent(event);
 if(!pause){
     //tank move
     QPointF pos=tank->pos();
-    int step=20;
+
+    int step=tank->Speed();
+
     if(event->key()==Qt::Key_Left&&pos.x()>-400){
         tank->moveBy(-step,0);
         tank->setDirection(3);
