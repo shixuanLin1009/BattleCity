@@ -3,23 +3,13 @@
 #include<QList>
 
 Tank::Tank(QGraphicsPixmapItem *parent)
-    :QGraphicsPixmapItem(parent), health(6)
+    :QGraphicsPixmapItem{parent}
 {
     setPixmap(QPixmap(":/img/Player1_Up.png").scaled(40,40));
     setZValue(1);
     setPos(0,0);
     tankDirection=0;
     m_Speed=20;
-}
-
-void Tank::takeDamage(int damage) {
-    health -= damage;
-    if (health <= 0) {
-        if (scene()) {
-            scene()->removeItem(this);
-            delete this;
-        }
-    }
 }
 
 void Tank::setDirection(int Direction)
@@ -34,43 +24,26 @@ int Tank::getDirection()
 
 void Tank::checkColliging(QPointF pos)
 {
-    QList <QGraphicsItem*> colliding_items = collidingItems();
+    QList <QGraphicsItem*> colliding_itmes = collidingItems();
 
-    for(int i = 0,n =colliding_items.size();i<n;i++){
-       if (typeid (*colliding_items[i]) == typeid(Obstacle)){
+    for(int i = 0,n =colliding_itmes.size();i<n;i++){
+       if (typeid (*colliding_itmes[i]) == typeid(Obstacle)){
            setPos(pos);
            setSpeed(20);
            return;
         }
-       if (typeid (*colliding_items[i]) == typeid(Steel)){
+       if (typeid (*colliding_itmes[i]) == typeid(Steel)){
            setPos(pos);
            return;
        }
-
-       if (typeid (*colliding_items[i]) == typeid(Stone)){
-           setPos(pos);
-           return;
-       }
-       //if (typeid (*colliding_items[i]) == typeid(Water)){
-           //setPos(pos);
-           //return;
-       //}
-
-       if (typeid (*colliding_items[i]) == typeid(Ice)){
+       if (typeid (*colliding_itmes[i]) == typeid(Ice)){
            setSpeed(40);
            return;
        }
-       if (typeid (*colliding_items[i]) == typeid(Water)){
-           setSpeed(2);
+       if (typeid (*colliding_itmes[i]) == typeid(Water)){
+           setSpeed(10);
            return;
        }
-    }
-}
-
-void Tank::hitPowerUp(PowerUps *powerUp) {
-    if (scene()) {
-       scene()->removeItem(powerUp);
-       delete powerUp;
     }
 }
 

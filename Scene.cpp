@@ -1,7 +1,6 @@
 #include "Scene.h"
 #include "Enemy.h"
 #include "Obstacle.h"
-#include "PowerUps.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <QFile>
@@ -54,107 +53,7 @@ Scene::Scene(int opt, QGraphicsScene *parent)
     }
     showMap();
 
-    powerUpTimer = new QTimer(this);
-    connect(powerUpTimer, &QTimer::timeout, this, &Scene::spawnPowerUp);
-
-    // start powerUpTimer
-    powerUpTimer->start(4500); // 4500 ms generate PowerUps
-
-    /*
-    connect(tank, &Tank::tankHitPowerUp, this, &Scene::handlePowerUpCollision);
-    if (tank2) {
-        connect(tank2, &Tank::tankHitPowerUp, this, &Scene::handlePowerUpCollision);
-    }
-    */
-
 }
-
-void Scene::spawnPowerUp() {
-    int randomChance = QRandomGenerator::global()->bounded(100); // 生成0到99
-
-    if (randomChance < 25) { // 25%的概率生成 Heart
-        int x, y;
-        PowerUps *heartPowerUp;
-        do {
-            x = QRandomGenerator::global()->bounded(-320, 320);
-            y = QRandomGenerator::global()->bounded(0, 60);
-            heartPowerUp = new PowerUps(Heart);
-            heartPowerUp->setPos(x, y);
-        } while (checkCollisionWithObstacles(heartPowerUp));
-        addItem(heartPowerUp);
-    } else if (randomChance < 35) { // 10%的機率生成 Grenade
-        int x, y;
-        PowerUps *grenadePowerUp;
-        do {
-            x = QRandomGenerator::global()->bounded(-320, -80);
-            y = QRandomGenerator::global()->bounded(-20, 60);
-            grenadePowerUp = new PowerUps(Grenade);
-            grenadePowerUp->setPos(x, y);
-        } while (checkCollisionWithObstacles(grenadePowerUp));
-        addItem(grenadePowerUp);
-    } else if (randomChance < 45) { // 10%的機率生成 Helmet
-        int x, y;
-        PowerUps *helmetPowerUp;
-        do {
-            x = QRandomGenerator::global()->bounded(80, 360);
-            y = QRandomGenerator::global()->bounded(-20, 60);
-            helmetPowerUp = new PowerUps(Helmet);
-            helmetPowerUp->setPos(x, y);
-        } while (checkCollisionWithObstacles(helmetPowerUp));
-        addItem(helmetPowerUp);
-    } else if (randomChance < 55) { // 10%的機率生成 Shovel
-        int x, y;
-        PowerUps *shovelPowerUp;
-        do {
-            x = QRandomGenerator::global()->bounded(80, 360);
-            y = QRandomGenerator::global()->bounded(-20, 60);
-            shovelPowerUp = new PowerUps(Shovel);
-            shovelPowerUp->setPos(x, y);
-        } while (checkCollisionWithObstacles(shovelPowerUp));
-        addItem(shovelPowerUp);
-    } else if (randomChance < 65) { // 10%的機率生成 Star
-        int x, y;
-        PowerUps *starPowerUp;
-        do {
-            x = QRandomGenerator::global()->bounded(-320, -80);
-            y = QRandomGenerator::global()->bounded(-20, 60);
-            starPowerUp = new PowerUps(Star);
-            starPowerUp->setPos(x, y);
-        } while (checkCollisionWithObstacles(starPowerUp));
-        addItem(starPowerUp);
-    } else if (randomChance < 75) { // 10%的機率生成 Timer
-        int x, y;
-        PowerUps *timerPowerUp;
-        do {
-            x = QRandomGenerator::global()->bounded(-320, -80);
-            y = QRandomGenerator::global()->bounded(-20, 60);
-            timerPowerUp = new PowerUps(Timer);
-            timerPowerUp->setPos(x, y);
-        } while (checkCollisionWithObstacles(timerPowerUp));
-        addItem(timerPowerUp);
-    }
-    // 其他25%情况下不生成任何 PowerUp
-}
-
-
-
-bool Scene::checkCollisionWithObstacles(QGraphicsItem *item) {
-    QList<QGraphicsItem *> collidingItems = item->collidingItems();
-    for (QGraphicsItem *collidingItem : collidingItems) {
-        // 如有障礙物，返回 true
-        if (dynamic_cast<Obstacle *>(collidingItem) != nullptr) {
-            return true;
-        }
-    }
-    return false; // 没有衝突
-}
-
-void Scene::handlePowerUpCollision(PowerUps *powerUp) {
-    //移除
-    this->removeItem(powerUp);
-    delete powerUp;
-}
-
 
 void Scene::showPauseGraphics()
 {
@@ -274,11 +173,9 @@ void Scene::showWater()
 
 
 void Scene::spawnEnemies() {
-
-    int ran= QRandomGenerator::global()->bounded(0, 5);
-    int ran_2= QRandomGenerator::global()->bounded(0, 5);
-
     totalEnemy++;
+    int ran= QRandomGenerator::global()->bounded(0, 4);
+    int ran_2= QRandomGenerator::global()->bounded(0, 4);
     Enemy *enemy1 = new Enemy(ran);
     enemy1->setPos(-240, -260);
     addItem(enemy1);
@@ -288,11 +185,9 @@ void Scene::spawnEnemies() {
     enemy2->setPos(240, -220);
     addItem(enemy2);
 
-    connect(this, &Scene::gamePause,enemy1, &Enemy::pause);
-    connect(this, &Scene::gamePlay,enemy1, &Enemy::play);
     connect(this, &Scene::gamePause,enemy2, &Enemy::pause);
     connect(this, &Scene::gamePlay,enemy2, &Enemy::play);
-    //
+//enemies.append(enemy2);
     if(option==0){
         connect(enemy1, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
         connect(enemy2, &Enemy::tankDestroyed, this, &Scene::gameOverGraphics);
@@ -312,10 +207,8 @@ for (auto *enemy : enemies) {
 void Scene::showMap()
 {
     showBase();
-    // Trees
     showIce();
     showWater();
-
     for(int i=0;i<=240;i+=40){
 
         Tree *a = new Tree();
@@ -324,14 +217,12 @@ void Scene::showMap()
         a++;
 
     }
-
     for(int i=0;i<=760;i+=40){
-        //底部邊界
+
         Obstacle *j = new Obstacle();
         j->setPos(-400+i,260);
         addItem(j);
         j++;
-        //頂部邊界
         Obstacle *k = new Obstacle();
         k->setPos(-400+i,-300);
         addItem(k);
@@ -340,12 +231,11 @@ void Scene::showMap()
     }
 
     for(int i=0;i<=560;i+=40){
-        //左側邊界
+
         Obstacle *j = new Obstacle();
         j->setPos(-400,-300+i);
         addItem(j);
         j++;
-        //右側邊界
         Obstacle *k = new Obstacle();
         k->setPos(360,-300+i);
         addItem(k);
@@ -353,43 +243,41 @@ void Scene::showMap()
 
     }
 
-    // 內部障礙物
     for(int i=0;i<=680;i+=120){
 
-        Water *j = new Water();
+        Obstacle *j = new Obstacle();
         j->setPos(-320+i,-220);
         addItem(j);
         j++;
-        Stone *k = new Stone();
+        Obstacle *k = new Obstacle();
         k->setPos(-320+i,-180);
         addItem(k);
         k++;
-        Stone *l = new Stone();
+        Obstacle *l = new Obstacle();
         l->setPos(-320+i,-140);
         addItem(l);
         l++;
-        Stone *m = new Stone();
+        Obstacle *m = new Obstacle();
         m->setPos(-320+i,-100);
         addItem(m);
         m++;
     }
 
-    // 內部障礙物
     for(int i=0;i<=120;i+=120){
 
-        Stone *j = new Stone();
+        Obstacle *j = new Obstacle();
         j->setPos(-320+i,60);
         addItem(j);
         j++;
-        Stone *k = new Stone();
+        Obstacle *k = new Obstacle();
         k->setPos(-320+i,100);
         addItem(k);
         k++;
-        Stone *l = new Stone();
+        Obstacle *l = new Obstacle();
         l->setPos(-320+i,140);
         addItem(l);
         l++;
-        Stone *m = new Stone();
+        Obstacle *m = new Obstacle();
         m->setPos(-320+i,180);
         addItem(m);
         m++;
@@ -397,19 +285,19 @@ void Scene::showMap()
 
     for(int i=0;i<=120;i+=120){
 
-        Stone *j = new Stone();
+        Obstacle *j = new Obstacle();
         j->setPos(160+i,60);
         addItem(j);
         j++;
-        Stone *k = new Stone();
+        Obstacle *k = new Obstacle();
         k->setPos(160+i,100);
         addItem(k);
         k++;
-        Stone *l = new Stone();
+        Obstacle *l = new Obstacle();
         l->setPos(160+i,140);
         addItem(l);
         l++;
-        Stone *m = new Stone();
+        Obstacle *m = new Obstacle();
         m->setPos(160+i,180);
         addItem(m);
         m++;
@@ -452,7 +340,7 @@ if(!pause){
     //tank move
     QPointF pos=tank->pos();
 
-    int step = tank->getSpeed();
+    int step=tank->Speed();
 
     if(event->key()==Qt::Key_Left&&pos.x()>-400){
         tank->moveBy(-step,0);
@@ -537,10 +425,8 @@ void Scene::tankDestroyed()
 {
     tank_destroyed++;
     qDebug() << tank_destroyed;
-    if (tank_destroyed == 2) {
-    tank->takeDamage(1);
-    tank2->takeDamage(1);
-    gameOverGraphics();
+    if(tank_destroyed==2){
+        gameOverGraphics();
     }
 }
 

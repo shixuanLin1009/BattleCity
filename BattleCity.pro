@@ -15,7 +15,6 @@ SOURCES += \
     GameOn.cpp \
     History.cpp \
     Obstacle.cpp \
-    PowerUps.cpp \
     Scene.cpp \
     Tank.cpp \
     main.cpp \
@@ -29,7 +28,6 @@ HEADERS += \
     GameOn.h \
     History.h \
     Obstacle.h \
-    PowerUps.h \
     Scene.h \
     Tank.h \
     widget.h
@@ -48,7 +46,6 @@ RESOURCES += \
     Enemy/Enemy.qrc \
     History.qrc \
     Obstacles/Obstacles.qrc \
-    PowerUps/PowerUps.qrc \
     image.qrc
 -v
 

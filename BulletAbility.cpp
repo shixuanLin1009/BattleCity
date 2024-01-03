@@ -17,11 +17,11 @@ BulletAbility::BulletAbility(int name, QGraphicsItem *parent):QGraphicsPixmapIte
 }
 void BulletAbility::eaten()
 {
-QList <QGraphicsItem *>  colliding_items = collidingItems();
+QList <QGraphicsItem *>  colliding_itmes = collidingItems();
 
-for(int i = 0,n =colliding_items.size();i<n;i++){
+for(int i = 0,n =colliding_itmes.size();i<n;i++){
 
-    if (typeid (*colliding_items[i]) == typeid(Tank)){
+    if (typeid (*colliding_itmes[i]) == typeid(Tank)){
         scene()->removeItem(this);
         delete this;
         qDebug() <<"Ability eaten";
