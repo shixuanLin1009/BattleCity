@@ -2,6 +2,7 @@
 #include "Tank.h"
 #include "Obstacle.h"
 #include "Enemy.h"
+#include "Scene.h"
 //#include "Base.h"
 #include <QTimer>
 #include <QGraphicsScene>
@@ -47,7 +48,6 @@ PowerUps::PowerUps(PowerUpType type, QGraphicsItem *parent)
     timer->start(7000); // 7秒移除未使用之 Powerup
 }
 
-/*
 // PowerUps效果設置
 void PowerUps::applyPowerUpEffect()
 {
@@ -78,7 +78,7 @@ void PowerUps::applyPowerUpEffect()
         break;
     }
 }
-*/
+
 
 void PowerUps::removePowerUp()
 {
@@ -95,7 +95,12 @@ void PowerUps::collisionWithTank() {
 void PowerUps::applyGrenadeEffect() {}
 void PowerUps::applyHeartEffect() {}
 void PowerUps::applyHelmetEffect() {}
-void PowerUps::applyStarEffect() {}
+void PowerUps::applyStarEffect() {
+    Scene* currentScene = dynamic_cast<Scene*>(this->scene());
+    if (currentScene) {
+        currentScene->addScore(500); // 调用 Scene 的 incrementScore 方法
+    }
+}
 void PowerUps::applyTimerEffect() {}
 void PowerUps::applyShovelEffect() {}
 

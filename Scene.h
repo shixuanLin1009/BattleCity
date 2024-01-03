@@ -21,7 +21,9 @@ public:
     void spawnEnemies();
     void updateEnemies();
     void tankDestroyed();
+    void addScore(int s);
     bool checkCollisionWithObstacles(QGraphicsItem *item);
+    void checkCollisions();
 public slots:
     void handlePowerUpCollision(PowerUps *powerUp);
 signals:
@@ -54,7 +56,7 @@ private:
     int score;
     int bestScore;
     int tank_destroyed;
-    // 添加以下声明
+
 private slots:
     void spawnPowerUp();
 
