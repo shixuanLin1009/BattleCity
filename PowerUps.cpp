@@ -98,9 +98,7 @@ void PowerUps::applyHelmetEffect() {}
 void PowerUps::applyStarEffect() {
     Scene* currentScene = dynamic_cast<Scene*>(this->scene());
     if (currentScene) {
-        for (int i = 0; i < 5; ++i) {
-            currentScene->incrementScore(); // 调用 Scene 的 incrementScore 方法
-        }
+        currentScene->addScore(500); // 调用 Scene 的 incrementScore 方法
     }
 }
 void PowerUps::applyTimerEffect() {}

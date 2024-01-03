@@ -21,6 +21,7 @@ public:
     void spawnEnemies();
     void updateEnemies();
     void tankDestroyed();
+    void addScore(int s);
     bool checkCollisionWithObstacles(QGraphicsItem *item);
     void checkCollisions();
 public slots:

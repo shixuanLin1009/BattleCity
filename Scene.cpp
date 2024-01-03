@@ -561,6 +561,11 @@ if (score > bestScore) {
     }
 }
 
+void Scene::addScore(int s)
+{
+    score+=s;
+}
+
 void Scene::tankDestroyed()
 {
     tank_destroyed++;
