@@ -44,11 +44,13 @@ void Tank::checkColliging(QPointF pos)
         }
        if (typeid (*colliding_items[i]) == typeid(Steel)){
            setPos(pos);
+           setSpeed(20);
            return;
        }
 
        if (typeid (*colliding_items[i]) == typeid(Stone)){
            setPos(pos);
+           setSpeed(20);
            return;
        }
        //if (typeid (*colliding_items[i]) == typeid(Water)){
@@ -62,6 +64,15 @@ void Tank::checkColliging(QPointF pos)
        }
        if (typeid (*colliding_items[i]) == typeid(Water)){
            setSpeed(2);
+           return;
+       }
+       if (typeid (*colliding_items[i]) == typeid(Obstacle)){
+           setPos(pos);
+           setSpeed(20);
+           return;
+       }
+       if (typeid (*colliding_items[i]) == typeid(PowerUps)){
+           scene()->removeItem(colliding_items[i]);
            return;
        }
     }

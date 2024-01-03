@@ -85,6 +85,7 @@ void Bullet::check_colliding_items()
                 if (enemy)
                     enemy->takeDamage(1); // 减少生命值
                 emit bulletHitsEnemv();
+                scene()->removeItem(colliding_items[i]);
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "Bullet deleted";
@@ -181,6 +182,7 @@ void EnemyBullet::check_colliding_items()
                 Tank *tank = dynamic_cast<Tank *>(colliding_items[i]);
                 if (tank)
                     tank->takeDamage(1); // 减少生命值
+                scene()->removeItem(colliding_items[i]);
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "EnemyBullet deleted";

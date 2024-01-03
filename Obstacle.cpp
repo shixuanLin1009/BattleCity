@@ -26,6 +26,7 @@ Tree::Tree()
 {
     setPixmap(QPixmap(":/Obstacles/Tree_1.png").scaled(40,40));
     setPixmap(QPixmap(":/Obstacles/Tree_2.png").scaled(40,40));
+    setZValue(1);
 }
 
 Stone::Stone(QGraphicsPixmapItem *parent) : Obstacle(parent) {
