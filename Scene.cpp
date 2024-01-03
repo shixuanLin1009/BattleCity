@@ -117,7 +117,7 @@ void Scene::spawnPowerUp() {
             shovelPowerUp->setPos(x, y);
         } while (checkCollisionWithObstacles(shovelPowerUp));
         addItem(shovelPowerUp);
-    } else if (randomChance < 65) { // 10%的機率生成 Star
+    } else if (randomChance < 85) { // 30%的機率生成 Star
         int x, y;
         PowerUps *starPowerUp;
         do {
@@ -127,7 +127,7 @@ void Scene::spawnPowerUp() {
             starPowerUp->setPos(x, y);
         } while (checkCollisionWithObstacles(starPowerUp));
         addItem(starPowerUp);
-    } else if (randomChance < 75) { // 10%的機率生成 Timer
+    } else if (randomChance < 100) { // 10%的機率生成 Timer
         int x, y;
         PowerUps *timerPowerUp;
         do {
@@ -138,7 +138,7 @@ void Scene::spawnPowerUp() {
         } while (checkCollisionWithObstacles(timerPowerUp));
         addItem(timerPowerUp);
     }
-    // 其他25%情况下不生成任何 PowerUp
+    // 至此所有機率分配完成
 }
 
 

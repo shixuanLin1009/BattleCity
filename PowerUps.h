@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QTimer>
+//#include "Scene.h" 不能用 相互 Include
 
 enum PowerUpType {
     Grenade,
@@ -13,6 +14,8 @@ enum PowerUpType {
     Star,
     Timer
 };
+
+class Scene; //前項聲明
 
 class PowerUps : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -36,6 +39,7 @@ private:
     void applyShovelEffect();
 
     QTimer *timer;
+    //Scene *scene;
 
 private slots:
     void removePowerUp();

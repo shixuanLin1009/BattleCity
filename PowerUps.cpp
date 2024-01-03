@@ -2,6 +2,7 @@
 #include "Tank.h"
 #include "Obstacle.h"
 #include "Enemy.h"
+#include "Scene.h"
 //#include "Base.h"
 #include <QTimer>
 #include <QGraphicsScene>
@@ -94,7 +95,14 @@ void PowerUps::collisionWithTank() {
 void PowerUps::applyGrenadeEffect() {}
 void PowerUps::applyHeartEffect() {}
 void PowerUps::applyHelmetEffect() {}
-void PowerUps::applyStarEffect() {}
+void PowerUps::applyStarEffect() {
+    Scene* currentScene = dynamic_cast<Scene*>(this->scene());
+    if (currentScene) {
+        for (int i = 0; i < 5; ++i) {
+            currentScene->incrementScore(); // 调用 Scene 的 incrementScore 方法
+        }
+    }
+}
 void PowerUps::applyTimerEffect() {}
 void PowerUps::applyShovelEffect() {}
 
