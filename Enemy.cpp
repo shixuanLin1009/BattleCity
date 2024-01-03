@@ -96,6 +96,10 @@ void Enemy::move() {
             setPos(pos);
             return;
         }
+        if (typeid (*colliding_items[i]) == typeid(Water)){
+            setPos(pos);
+            return;
+        }
         if (typeid (*colliding_items[i]) == typeid(Tank)){
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
