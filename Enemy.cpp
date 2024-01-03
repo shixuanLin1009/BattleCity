@@ -1,8 +1,6 @@
 #include "Enemy.h"
-//#include "Bullet.h"
 #include <QGraphicsScene>
 #include <QRandomGenerator>
-//#include <QBrush>
 #include <QTimer>
 #include<QList>
 #include"Obstacle.h"
@@ -27,22 +25,22 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
     switch (enemyType) {
     case 1:
         originalPixmap.load(":/Enemy/NormalTank.png");
-        health = 10;
+        health = 1;
         speed = 2*unit;
         break;
     case 2:
         originalPixmap.load(":/Enemy/FastTank.png");
-        health = 10;
+        health = 1;
         speed = 3*unit;
         break;
     case 3:
         originalPixmap.load(":/Enemy/PowerTank.png");
-        health = 20;
+        health = 2;
         speed = 2*unit;
         break;
     case 4:
         originalPixmap.load(":/Enemy/ArmorTank.png");
-        health = 40;
+        health = 3;
         speed = 1*unit;
         break;
     default:
@@ -83,17 +81,17 @@ void Enemy::move() {
     }
     //checkBounds();
 
-    QList <QGraphicsItem*> colliding_itmes = collidingItems();
+    QList <QGraphicsItem*> colliding_items = collidingItems();
 
-    for(int i = 0,n =colliding_itmes.size();i<n;i++){
-        if (typeid (*colliding_itmes[i]) == typeid(Obstacle)){
+    for(int i = 0,n =colliding_items.size();i<n;i++){
+        if (typeid (*colliding_items[i]) == typeid(Obstacle)){
             setPos(pos);
             return;
         }
-        if (typeid (*colliding_itmes[i]) == typeid(Tank)){
-            scene()->removeItem(colliding_itmes[i]);
+        if (typeid (*colliding_items[i]) == typeid(Tank)){
+            scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
-            delete colliding_itmes[i];
+            delete colliding_items[i];
             delete this;
             qDebug() <<"Bullet deleted";
             qDebug() <<"Enemy deleted";
@@ -119,30 +117,6 @@ void Enemy::RandomDirection() {
 
 
 void Enemy::checkBounds() {
-    /*
-    QRectF sceneBounds = scene()->sceneRect();
-    qreal halfWidth = pixmap().width() / 2.0;
-    qreal halfHeight = pixmap().height() / 2.0;
-    qreal tolerance = 10; // Tolerance value for collision detection
-
-    // Check left and right bounds with tolerance
-    if (x() - halfWidth < sceneBounds.left() + tolerance) {
-        setPos(sceneBounds.left() + halfWidth + tolerance, y());
-        RandomDirection();
-    } else if (x() + halfWidth > sceneBounds.right() - tolerance) {
-        setPos(sceneBounds.right() - halfWidth - tolerance, y());
-        RandomDirection();
-    }
-
-    // Check top and bottom bounds with tolerance
-    if (y() - halfHeight < sceneBounds.top() + tolerance) {
-        setPos(x(), sceneBounds.top() + halfHeight + tolerance);
-        RandomDirection();
-    } else if (y() + halfHeight > sceneBounds.bottom() - tolerance) {
-        setPos(x(), sceneBounds.bottom() - halfHeight - tolerance);
-        RandomDirection();
-    }
-    */
 }
 
 
@@ -171,6 +145,15 @@ Enemy::Direction Enemy::getDirection() const {
     return direction;
 }
 
+void Enemy::takeDamage(int damage) {
+    health -= damage;
+    if (health <= 0) {
+        if (scene()) {
+            scene()->removeItem(this);
+            delete this;
+        }
+    }
+}
 void Enemy::enemyWin() {
     qDebug() << "Tank destroyed";
     emit tankDestroyed();
