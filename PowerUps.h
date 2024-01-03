@@ -19,14 +19,13 @@ class PowerUps : public QObject, public QGraphicsPixmapItem {
 
 public:
     PowerUps(PowerUpType type, QGraphicsItem *parent = nullptr);
+    void applyPowerUpEffect();
 
 public slots:
     void collisionWithTank();
 
 private:
     PowerUpType powerUpType;
-
-    void applyPowerUpEffect();
 
     //different effects of PowerUps
     void applyGrenadeEffect();

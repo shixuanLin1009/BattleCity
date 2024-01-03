@@ -47,7 +47,6 @@ PowerUps::PowerUps(PowerUpType type, QGraphicsItem *parent)
     timer->start(7000); // 7秒移除未使用之 Powerup
 }
 
-/*
 // PowerUps效果設置
 void PowerUps::applyPowerUpEffect()
 {
@@ -78,7 +77,7 @@ void PowerUps::applyPowerUpEffect()
         break;
     }
 }
-*/
+
 
 void PowerUps::removePowerUp()
 {

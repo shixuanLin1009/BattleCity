@@ -5,7 +5,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <QFile>
-#include<QRandomGenerator>
+#include <QRandomGenerator>
 
 Scene::Scene(int opt, QGraphicsScene *parent)
     : QGraphicsScene{parent},tank(new Tank)
@@ -39,8 +39,13 @@ Scene::Scene(int opt, QGraphicsScene *parent)
         spawnEnemies();
     }
     addItem(tank);
+
+    //調用更新敵人、檢查PowerUps
     moveTimer = new QTimer();
-    connect(moveTimer, &QTimer::timeout, this, &Scene::updateEnemies);
+    connect(moveTimer, &QTimer::timeout, this, [&]() {
+        updateEnemies(); // 更新敵人位置
+        checkCollisions(); // 檢查PowerUps碰撞
+    });
 
     moveTimer->start(200); // Update every 200 milliseconds
 
@@ -70,9 +75,9 @@ Scene::Scene(int opt, QGraphicsScene *parent)
 }
 
 void Scene::spawnPowerUp() {
-    int randomChance = QRandomGenerator::global()->bounded(100); // 生成0到99
+    int randomChance = QRandomGenerator::global()->bounded(100);
 
-    if (randomChance < 25) { // 25%的概率生成 Heart
+    if (randomChance < 25) { // 25%的機率生成 Heart
         int x, y;
         PowerUps *heartPowerUp;
         do {
@@ -154,6 +159,29 @@ void Scene::handlePowerUpCollision(PowerUps *powerUp) {
     this->removeItem(powerUp);
     delete powerUp;
 }
+
+
+void Scene::checkCollisions() {
+    foreach (QGraphicsItem *item, items()) {
+        Tank *tank = dynamic_cast<Tank *>(item);
+        if (tank) {
+            foreach (QGraphicsItem *other, items()) {
+                PowerUps *powerUp = dynamic_cast<PowerUps *>(other);
+                if (powerUp && tank->collidesWithItem(powerUp)) {
+                    // 觸發PowerUp效果
+                    powerUp->applyPowerUpEffect(); // 根據powerUp對象的類型觸發相應效果
+
+                    // 從場景中移除PowerUp
+                    removeItem(powerUp);
+                    delete powerUp;
+                    qDebug() << "Checking for PowerUps collisions";
+                }
+            }
+        }
+    }
+}
+
+
 
 
 void Scene::showPauseGraphics()
@@ -356,7 +384,7 @@ void Scene::showMap()
     // 內部障礙物
     for(int i=0;i<=680;i+=120){
 
-        Water *j = new Water();
+        Stone *j = new Stone();
         j->setPos(-320+i,-220);
         addItem(j);
         j++;

@@ -65,7 +65,7 @@ void Bullet::check_colliding_items()
             if (typeid(*colliding_items[i]) == typeid(Steel)) {
                 Steel *steel = dynamic_cast<Steel *>(colliding_items[i]);
                 if (steel)
-                    steel->takeDamage(1); // 减少生命值
+                    steel->takeDamage(1); // 减少 Steel 生命值
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "Bullet deleted";
@@ -74,7 +74,7 @@ void Bullet::check_colliding_items()
             if (typeid(*colliding_items[i]) == typeid(Stone)) {
                 Stone *stone = dynamic_cast<Stone *>(colliding_items[i]);
                 if (stone)
-                    stone->takeDamage(1); // 减少生命值
+                    stone->takeDamage(1); // 减少 Stone 生命值
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "Bullet deleted";
@@ -83,7 +83,7 @@ void Bullet::check_colliding_items()
             if (typeid(*colliding_items[i]) == typeid(Enemy)) {
                 Enemy *enemy = dynamic_cast<Enemy *>(colliding_items[i]);
                 if (enemy)
-                    enemy->takeDamage(1); // 减少生命值
+                    enemy->takeDamage(1); // 减少 EnemyTank 生命值
                 emit bulletHitsEnemv();
                 scene()->removeItem(this);
                 delete this;
@@ -161,7 +161,7 @@ void EnemyBullet::check_colliding_items()
             if (typeid(*colliding_items[i]) == typeid(Steel)) {
                 Steel *steel = dynamic_cast<Steel *>(colliding_items[i]);
                 if (steel)
-                    steel->takeDamage(1); // 减少生命值
+                    steel->takeDamage(1); // 减少 Steel 生命值
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "EnemyBullet deleted";
@@ -170,7 +170,7 @@ void EnemyBullet::check_colliding_items()
             if (typeid(*colliding_items[i]) == typeid(Stone)) {
                 Stone *stone = dynamic_cast<Stone *>(colliding_items[i]);
                 if (stone)
-                    stone->takeDamage(1); // 减少生命值
+                    stone->takeDamage(1); // 减少 Stone 生命值
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "EnemyBullet deleted";
@@ -180,7 +180,7 @@ void EnemyBullet::check_colliding_items()
                 emit bulletHitsTank();
                 Tank *tank = dynamic_cast<Tank *>(colliding_items[i]);
                 if (tank)
-                    tank->takeDamage(1); // 减少生命值
+                    tank->takeDamage(1); // 减少 PlayerTank 生命值
                 scene()->removeItem(this);
                 delete this;
                 qDebug() << "EnemyBullet deleted";

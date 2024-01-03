@@ -20,8 +20,10 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
     connect(shootTimer,&QTimer::timeout,this,&Enemy::shoot);
     shootTimer->start(700);
 
+    //單位速度
     int unit =40;
-    //四種敵人之參數
+
+    //四種 Enemies 之參數設置
     switch (enemyType) {
     case 1:
         originalPixmap.load(":/Enemy/NormalTank.png");
@@ -31,16 +33,16 @@ Enemy::Enemy(int type,QObject *parent_1,QGraphicsPixmapItem *parent_2)
     case 2:
         originalPixmap.load(":/Enemy/FastTank.png");
         health = 1;
-        speed = 3*unit;
+        speed = 3*unit; // fatest
         break;
     case 3:
         originalPixmap.load(":/Enemy/PowerTank.png");
-        health = 2;
+        health = 2; // Power
         speed = 2*unit;
         break;
     case 4:
         originalPixmap.load(":/Enemy/ArmorTank.png");
-        health = 3;
+        health = 3; // Armor
         speed = 1*unit;
         break;
     default:
@@ -157,6 +159,7 @@ Enemy::Direction Enemy::getDirection() const {
     return direction;
 }
 
+// Enemy 血量判斷邏輯
 void Enemy::takeDamage(int damage) {
     health -= damage;
     if (health <= 0) {
