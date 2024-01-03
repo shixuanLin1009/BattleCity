@@ -21,6 +21,9 @@ public:
     void spawnEnemies();
     void updateEnemies();
     void tankDestroyed();
+    bool checkCollisionWithObstacles(QGraphicsItem *item);
+public slots:
+    void handlePowerUpCollision(PowerUps *powerUp);
 signals:
     void gamePause();
     void gamePlay();
@@ -42,6 +45,7 @@ private:
     QGraphicsTextItem *gameOverItem;
     QTimer *moveTimer;
     QTimer *spawnTimer;
+    QTimer *powerUpTimer;
     QList<Enemy*> enemies;
     Base *base;
     int option;
@@ -50,6 +54,10 @@ private:
     int score;
     int bestScore;
     int tank_destroyed;
+    // 添加以下声明
+private slots:
+    void spawnPowerUp();
+
 protected:
     void keyPressEvent(QKeyEvent *event);
 };

@@ -61,9 +61,16 @@ void Tank::checkColliging(QPointF pos)
            return;
        }
        if (typeid (*colliding_items[i]) == typeid(Water)){
-           setSpeed(10);
+           setSpeed(2);
            return;
        }
+    }
+}
+
+void Tank::hitPowerUp(PowerUps *powerUp) {
+    if (scene()) {
+       scene()->removeItem(powerUp);
+       delete powerUp;
     }
 }
 

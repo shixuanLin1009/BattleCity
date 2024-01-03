@@ -1,8 +1,6 @@
 #include "Enemy.h"
-//#include "Bullet.h"
 #include <QGraphicsScene>
 #include <QRandomGenerator>
-//#include <QBrush>
 #include <QTimer>
 #include<QList>
 #include"Obstacle.h"
@@ -119,30 +117,6 @@ void Enemy::RandomDirection() {
 
 
 void Enemy::checkBounds() {
-    /*
-    QRectF sceneBounds = scene()->sceneRect();
-    qreal halfWidth = pixmap().width() / 2.0;
-    qreal halfHeight = pixmap().height() / 2.0;
-    qreal tolerance = 10; // Tolerance value for collision detection
-
-    // Check left and right bounds with tolerance
-    if (x() - halfWidth < sceneBounds.left() + tolerance) {
-        setPos(sceneBounds.left() + halfWidth + tolerance, y());
-        RandomDirection();
-    } else if (x() + halfWidth > sceneBounds.right() - tolerance) {
-        setPos(sceneBounds.right() - halfWidth - tolerance, y());
-        RandomDirection();
-    }
-
-    // Check top and bottom bounds with tolerance
-    if (y() - halfHeight < sceneBounds.top() + tolerance) {
-        setPos(x(), sceneBounds.top() + halfHeight + tolerance);
-        RandomDirection();
-    } else if (y() + halfHeight > sceneBounds.bottom() - tolerance) {
-        setPos(x(), sceneBounds.bottom() - halfHeight - tolerance);
-        RandomDirection();
-    }
-    */
 }
 
 
